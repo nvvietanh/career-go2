@@ -66,6 +66,7 @@ router.post("/signup", (req, res) => {
 });
 
 router.post("/login", (req, res, next) => {
+  console.log("An user want to log in");
   passport.authenticate(
     "local",
     { session: false },
@@ -83,6 +84,7 @@ router.post("/login", (req, res, next) => {
         token: token,
         type: user.type,
       });
+      console.log("The user succeeded in logging in");
     }
   )(req, res, next);
 });

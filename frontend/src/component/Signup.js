@@ -53,7 +53,7 @@ const MultifieldInput = (props) => {
         >
           <Grid item xs={6}>
             <TextField
-              label={`Institution Name #${key + 1}`}
+              label={`Tên cơ sở giáo dục/nghiên cứu #${key + 1}`}
               value={education[key].institutionName}
               onChange={(event) => {
                 const newEdu = [...education];
@@ -65,7 +65,7 @@ const MultifieldInput = (props) => {
           </Grid>
           <Grid item xs={3}>
             <TextField
-              label="Start Year"
+              label="Năm bắt đầu"
               value={obj.startYear}
               variant="outlined"
               type="number"
@@ -78,7 +78,7 @@ const MultifieldInput = (props) => {
           </Grid>
           <Grid item xs={3}>
             <TextField
-              label="End Year"
+              label="Năm kết thúc"
               value={obj.endYear}
               variant="outlined"
               type="number"
@@ -107,7 +107,7 @@ const MultifieldInput = (props) => {
           }
           className={classes.inputBox}
         >
-          Add another institution details
+          Thêm thông tin học vấn
         </Button>
       </Grid>
     </>
@@ -228,7 +228,7 @@ const Login = (props) => {
           setPopup({
             open: true,
             severity: "success",
-            message: "Logged in successfully",
+            message: "Đăng nhập thành công",
           });
           console.log(response);
         })
@@ -245,7 +245,7 @@ const Login = (props) => {
       setPopup({
         open: true,
         severity: "error",
-        message: "Incorrect Input",
+        message: "Đầu vào không hợp lệ",
       });
     }
   };
@@ -258,7 +258,7 @@ const Login = (props) => {
           required: true,
           untouched: false,
           error: true,
-          message: `${obj[0].toUpperCase() + obj.substr(1)} is required`,
+          message: `${obj[0].toUpperCase() + obj.substr(1)} là bắt buộc`,
         };
       } else {
         tmpErrorHandler[obj] = inputErrorHandler[obj];
@@ -298,7 +298,7 @@ const Login = (props) => {
           setPopup({
             open: true,
             severity: "success",
-            message: "Logged in successfully",
+            message: "Đăng nhập thành công",
           });
           console.log(response);
         })
@@ -315,7 +315,7 @@ const Login = (props) => {
       setPopup({
         open: true,
         severity: "error",
-        message: "Incorrect Input",
+        message: "Đầu vào không hợp lệ",
       });
     }
   };
@@ -327,13 +327,14 @@ const Login = (props) => {
       <Grid container direction="column" spacing={4} alignItems="center">
         <Grid item>
           <Typography variant="h3" component="h2">
-            Signup
+            Đăng ký
           </Typography>
         </Grid>
         <Grid item>
           <TextField
             select
-            label="Category"
+            // label="Category"
+            label="Đối tượng"
             variant="outlined"
             className={classes.inputBox}
             value={signupDetails.type}
@@ -341,13 +342,13 @@ const Login = (props) => {
               handleInput("type", event.target.value);
             }}
           >
-            <MenuItem value="applicant">Applicant</MenuItem>
-            <MenuItem value="recruiter">Recruiter</MenuItem>
+            <MenuItem value="applicant">Ứng viên</MenuItem>
+            <MenuItem value="recruiter">Nhà tuyển dụng</MenuItem>
           </TextField>
         </Grid>
         <Grid item>
           <TextField
-            label="Name"
+            label="Họ tên"
             value={signupDetails.name}
             onChange={(event) => handleInput("name", event.target.value)}
             className={classes.inputBox}
@@ -355,7 +356,7 @@ const Login = (props) => {
             helperText={inputErrorHandler.name.message}
             onBlur={(event) => {
               if (event.target.value === "") {
-                handleInputError("name", true, "Name is required");
+                handleInputError("name", true, "Họ tên là bắt buộc");
               } else {
                 handleInputError("name", false, "");
               }
@@ -376,7 +377,7 @@ const Login = (props) => {
         </Grid>
         <Grid item>
           <PasswordInput
-            label="Password"
+            label="Mật khẩu"
             value={signupDetails.password}
             onChange={(event) => handleInput("password", event.target.value)}
             className={classes.inputBox}
@@ -384,7 +385,7 @@ const Login = (props) => {
             helperText={inputErrorHandler.password.message}
             onBlur={(event) => {
               if (event.target.value === "") {
-                handleInputError("password", true, "Password is required");
+                handleInputError("password", true, "Mật khẩu là bắt buộc");
               } else {
                 handleInputError("password", false, "");
               }
@@ -400,9 +401,9 @@ const Login = (props) => {
             <Grid item>
               <ChipInput
                 className={classes.inputBox}
-                label="Skills"
+                label="Kỹ năng"
                 variant="outlined"
-                helperText="Press enter to add skills"
+                helperText="Bấm Enter để thêm kỹ năng"
                 onChange={(chips) =>
                   setSignupDetails({ ...signupDetails, skills: chips })
                 }
@@ -428,7 +429,7 @@ const Login = (props) => {
             <Grid item>
               <FileUploadInput
                 className={classes.inputBox}
-                label="Profile Photo (.jpg/.png)"
+                label="Ảnh hồ sơ (.jpg/.png)"
                 icon={<FaceIcon />}
                 // value={files.profileImage}
                 // onChange={(event) =>
@@ -447,7 +448,7 @@ const Login = (props) => {
           <>
             <Grid item style={{ width: "100%" }}>
               <TextField
-                label="Bio (upto 250 words)"
+                label="Tiểu sử (tối đa 250 từ)"
                 multiline
                 rows={8}
                 style={{ width: "100%" }}
@@ -485,7 +486,7 @@ const Login = (props) => {
             }}
             className={classes.submitButton}
           >
-            Signup
+            Đăng ký
           </Button>
         </Grid>
       </Grid>

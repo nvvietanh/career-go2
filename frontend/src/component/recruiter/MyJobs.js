@@ -157,16 +157,16 @@ const JobTile = (props) => {
           <Grid item>
             <Rating value={job.rating !== -1 ? job.rating : null} readOnly />
           </Grid>
-          <Grid item>Role : {job.jobType}</Grid>
-          <Grid item>Salary : &#8377; {job.salary} per month</Grid>
+          <Grid item>Loại hình : {job.jobType}</Grid>
+          <Grid item>Lương : &#8363; {job.salary} / tháng</Grid>
           <Grid item>
-            Duration :{" "}
+            Thời lượng :{" "}
             {job.duration !== 0 ? `${job.duration} month` : `Flexible`}
           </Grid>
-          <Grid item>Date Of Posting: {postedOn.toLocaleDateString()}</Grid>
-          <Grid item>Number of Applicants: {job.maxApplicants}</Grid>
+          <Grid item>Ngày đăng: {postedOn.toLocaleDateString()}</Grid>
+          <Grid item>Số ứng viên tối đa: {job.maxApplicants}</Grid>
           <Grid item>
-            Remaining Number of Positions:{" "}
+            Số vị trí còn lại:{" "}
             {job.maxPositions - job.acceptedCandidates}
           </Grid>
           <Grid item>
@@ -183,7 +183,8 @@ const JobTile = (props) => {
               className={classes.statusBlock}
               onClick={() => handleClick(`/job/applications/${job._id}`)}
             >
-              View Applications
+              {/* View Applications */}
+              Xem danh sách đơn ứng tuyển
             </Button>
           </Grid>
           <Grid item>
@@ -198,7 +199,7 @@ const JobTile = (props) => {
                 color: "#fff",
               }}
             >
-              Update Details
+              Cập nhật thông tin
             </Button>
           </Grid>
           <Grid item>
@@ -210,7 +211,7 @@ const JobTile = (props) => {
                 setOpen(true);
               }}
             >
-              Delete Job
+              Xóa việc làm
             </Button>
           </Grid>
         </Grid>
@@ -228,7 +229,8 @@ const JobTile = (props) => {
           }}
         >
           <Typography variant="h4" style={{ marginBottom: "10px" }}>
-            Are you sure?
+            {/* Are you sure? */}
+            Xác nhận?
           </Typography>
           <Grid container justify="center" spacing={5}>
             <Grid item>
@@ -238,7 +240,7 @@ const JobTile = (props) => {
                 style={{ padding: "10px 50px" }}
                 onClick={() => handleDelete()}
               >
-                Delete
+                Xóa
               </Button>
             </Grid>
             <Grid item>
@@ -248,7 +250,7 @@ const JobTile = (props) => {
                 style={{ padding: "10px 50px" }}
                 onClick={() => handleClose()}
               >
-                Cancel
+                Hủy
               </Button>
             </Grid>
           </Grid>
@@ -271,7 +273,7 @@ const JobTile = (props) => {
           }}
         >
           <Typography variant="h4" style={{ marginBottom: "10px" }}>
-            Update Details
+            Cập nhật thông tin
           </Typography>
           <Grid
             container
@@ -329,7 +331,8 @@ const JobTile = (props) => {
                 style={{ padding: "10px 50px" }}
                 onClick={() => handleJobUpdate()}
               >
-                Update
+                {/* Update */}
+                Cập nhật
               </Button>
             </Grid>
             <Grid item>
@@ -339,7 +342,7 @@ const JobTile = (props) => {
                 style={{ padding: "10px 50px" }}
                 onClick={() => handleCloseUpdate()}
               >
-                Cancel
+                Hủy
               </Button>
             </Grid>
           </Grid>
@@ -364,7 +367,8 @@ const FilterPopup = (props) => {
         <Grid container direction="column" alignItems="center" spacing={3}>
           <Grid container item alignItems="center">
             <Grid item xs={3}>
-              Job Type
+              {/* Job Type */}
+              Loại hình
             </Grid>
             <Grid
               container
@@ -390,7 +394,7 @@ const FilterPopup = (props) => {
                       }}
                     />
                   }
-                  label="Full Time"
+                  label="Toàn thời gian"
                 />
               </Grid>
               <Grid item>
@@ -410,7 +414,7 @@ const FilterPopup = (props) => {
                       }}
                     />
                   }
-                  label="Part Time"
+                  label="Bán thời gian"
                 />
               </Grid>
               <Grid item>
@@ -430,14 +434,14 @@ const FilterPopup = (props) => {
                       }}
                     />
                   }
-                  label="Work From Home"
+                  label="Làm việc từ xa"
                 />
               </Grid>
             </Grid>
           </Grid>
           <Grid container item alignItems="center">
             <Grid item xs={3}>
-              Salary
+              Lương
             </Grid>
             <Grid item xs={9}>
               <Slider
@@ -461,12 +465,12 @@ const FilterPopup = (props) => {
           </Grid>
           <Grid container item alignItems="center">
             <Grid item xs={3}>
-              Duration
+              Thời lượng
             </Grid>
             <Grid item xs={9}>
               <TextField
                 select
-                label="Duration"
+                label="Thời lượng"
                 variant="outlined"
                 fullWidth
                 value={searchOptions.duration}
@@ -477,7 +481,7 @@ const FilterPopup = (props) => {
                   })
                 }
               >
-                <MenuItem value="0">All</MenuItem>
+                <MenuItem value="0">Tất cả</MenuItem>
                 <MenuItem value="1">1</MenuItem>
                 <MenuItem value="2">2</MenuItem>
                 <MenuItem value="3">3</MenuItem>
@@ -490,7 +494,7 @@ const FilterPopup = (props) => {
           </Grid>
           <Grid container item alignItems="center">
             <Grid item xs={3}>
-              Sort
+              Sắp xếp
             </Grid>
             <Grid item container direction="row" xs={9}>
               <Grid
@@ -522,7 +526,7 @@ const FilterPopup = (props) => {
                 </Grid>
                 <Grid item>
                   <label for="salary">
-                    <Typography>Salary</Typography>
+                    <Typography>Lương</Typography>
                   </label>
                 </Grid>
                 <Grid item>
@@ -578,7 +582,7 @@ const FilterPopup = (props) => {
                 </Grid>
                 <Grid item>
                   <label for="duration">
-                    <Typography>Duration</Typography>
+                    <Typography>Thời lượng</Typography>
                   </label>
                 </Grid>
                 <Grid item>
@@ -634,7 +638,7 @@ const FilterPopup = (props) => {
                 </Grid>
                 <Grid item>
                   <label for="rating">
-                    <Typography>Rating</Typography>
+                    <Typography>Đánh giá</Typography>
                   </label>
                 </Grid>
                 <Grid item>
@@ -671,7 +675,7 @@ const FilterPopup = (props) => {
               style={{ padding: "10px 50px" }}
               onClick={() => getData()}
             >
-              Apply
+              Áp dụng
             </Button>
           </Grid>
         </Grid>
@@ -718,14 +722,23 @@ const MyJobs = (props) => {
     if (searchOptions.query !== "") {
       searchParams = [...searchParams, `q=${searchOptions.query}`];
     }
+    // if (searchOptions.jobType.fullTime) {
+    //   searchParams = [...searchParams, `jobType=Full%20Time`];
+    // }
+    // if (searchOptions.jobType.partTime) {
+    //   searchParams = [...searchParams, `jobType=Part%20Time`];
+    // }
+    // if (searchOptions.jobType.wfh) {
+    //   searchParams = [...searchParams, `jobType=Work%20From%20Home`];
+    // }
     if (searchOptions.jobType.fullTime) {
-      searchParams = [...searchParams, `jobType=Full%20Time`];
+      searchParams = [...searchParams, `jobType=Toàn%20thời%20gian`];
     }
     if (searchOptions.jobType.partTime) {
-      searchParams = [...searchParams, `jobType=Part%20Time`];
+      searchParams = [...searchParams, `jobType=Bán%20thời%20gian`];
     }
     if (searchOptions.jobType.wfh) {
-      searchParams = [...searchParams, `jobType=Work%20From%20Home`];
+      searchParams = [...searchParams, `jobType=Làm%20việc%20từ%20xa`];
     }
     if (searchOptions.salary[0] != 0) {
       searchParams = [
@@ -780,7 +793,7 @@ const MyJobs = (props) => {
         setPopup({
           open: true,
           severity: "error",
-          message: "Error",
+          message: "Xảy ra lỗi",
         });
       });
   };
@@ -802,11 +815,12 @@ const MyJobs = (props) => {
           alignItems="center"
         >
           <Grid item xs>
-            <Typography variant="h2">My Jobs</Typography>
+            <Typography variant="h2">Việc làm của tôi</Typography>
           </Grid>
           <Grid item xs>
             <TextField
-              label="Search Jobs"
+              // label="Search Jobs"
+              label="Tìm kiếm"
               value={searchOptions.query}
               onChange={(event) =>
                 setSearchOptions({
@@ -853,7 +867,8 @@ const MyJobs = (props) => {
             })
           ) : (
             <Typography variant="h5" style={{ textAlign: "center" }}>
-              No jobs found
+              {/* No jobs found */}
+              Không có việc làm nào
             </Typography>
           )}
         </Grid>

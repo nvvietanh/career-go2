@@ -40,50 +40,50 @@ const Navbar = (props) => {
           userType() === "recruiter" ? (
             <>
               <Button color="inherit" onClick={() => handleClick("/home")}>
-                Home
+                Trang chủ
               </Button>
               <Button color="inherit" onClick={() => handleClick("/addjob")}>
-                Add Jobs
+                Thêm việc làm
               </Button>
               <Button color="inherit" onClick={() => handleClick("/myjobs")}>
-                My Jobs
+                Việc làm của tôi
               </Button>
               <Button color="inherit" onClick={() => handleClick("/employees")}>
-                Employees
+                Nhân viên
               </Button>
               <Button color="inherit" onClick={() => handleClick("/profile")}>
-                Profile
+                Hồ sơ
               </Button>
               <Button color="inherit" onClick={() => handleClick("/logout")}>
-                Logout
+                Đăng xuất
               </Button>
             </>
           ) : (
             <>
               <Button color="inherit" onClick={() => handleClick("/home")}>
-                Home
+                Trang chủ
               </Button>
               <Button
                 color="inherit"
                 onClick={() => handleClick("/applications")}
               >
-                Applications
+                Đơn ứng tuyển
               </Button>
               <Button color="inherit" onClick={() => handleClick("/profile")}>
-                Profile
+                Hồ sơ
               </Button>
               <Button color="inherit" onClick={() => handleClick("/logout")}>
-                Logout
+                Đăng xuất
               </Button>
             </>
           )
         ) : (
           <>
             <Button color="inherit" onClick={() => handleClick("/login")}>
-              Login
+              Đăng nhập
             </Button>
             <Button color="inherit" onClick={() => handleClick("/signup")}>
-              Signup
+              Đăng ký
             </Button>
           </>
         )}

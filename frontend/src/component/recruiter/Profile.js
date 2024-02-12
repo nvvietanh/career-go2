@@ -124,7 +124,7 @@ const Profile = (props) => {
         style={{ padding: "30px", minHeight: "93vh" }}
       >
         <Grid item>
-          <Typography variant="h2">Profile</Typography>
+          <Typography variant="h2">Hồ sơ</Typography>
         </Grid>
         <Grid item xs style={{ width: "100%" }}>
           <Paper
@@ -141,7 +141,7 @@ const Profile = (props) => {
             <Grid container direction="column" alignItems="stretch" spacing={3}>
               <Grid item>
                 <TextField
-                  label="Name"
+                  label="Họ tên"
                   value={profileDetails.name}
                   onChange={(event) => handleInput("name", event.target.value)}
                   className={classes.inputBox}
@@ -152,7 +152,7 @@ const Profile = (props) => {
               </Grid>
               <Grid item>
                 <TextField
-                  label="Bio (upto 250 words)"
+                  label="Tiểu sử (tối đa 250 từ)"
                   multiline
                   rows={8}
                   style={{ width: "100%" }}
@@ -190,7 +190,7 @@ const Profile = (props) => {
               style={{ padding: "10px 50px", marginTop: "30px" }}
               onClick={() => handleUpdate()}
             >
-              Update Details
+              Cập nhật thông tin
             </Button>
           </Paper>
         </Grid>
