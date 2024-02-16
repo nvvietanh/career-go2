@@ -140,7 +140,7 @@ const ApplicationTile = (props) => {
           </Grid>
           <Grid item>Đăng bởi: {application.recruiter.name}</Grid>
           <Grid item>Loại hình : {application.job.jobType}</Grid>
-          <Grid item>Lương : &#8377; {application.job.salary} mỗi tháng</Grid>
+          <Grid item>Lương : &#8363; {application.job.salary} mỗi tháng</Grid>
           <Grid item>
             Thời lượng :{" "}
             {application.job.duration !== 0
