@@ -20,7 +20,6 @@ import isAuth, { userType } from "./lib/isAuth";
 
 const useStyles = makeStyles((theme) => ({
   body: {
-    display: "flex",
     flexDirection: "column",
     justifyContent: "center",
     alignItems: "center",
@@ -28,6 +27,7 @@ const useStyles = makeStyles((theme) => ({
     paddingTop: "64px",
     boxSizing: "border-box",
     width: "100%",
+    overflow: "hidden"
   },
 }));
 

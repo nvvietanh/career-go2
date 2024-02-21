@@ -7,8 +7,8 @@ const fs = require("fs");
 
 // MongoDB
 mongoose
-  .connect("mongodb://127.0.0.1:27017/jobPortal", {
-  // .connect("mongodb+srv://vietanh261:26012003@jobportal.ufitfdo.mongodb.net/", {
+  // .connect("mongodb://127.0.0.1:27017/jobPortal", {
+  .connect("mongodb+srv://vietanh261:26012003@jobportal.ufitfdo.mongodb.net/", {
     useNewUrlParser: true,
     useUnifiedTopology: true,
     useCreateIndex: true,
@@ -47,7 +47,7 @@ app.use("/host", require("./routes/downloadRoutes"));
 
 app.get("/", (req, res) => {
   res.send("API is running...");
-}) 
+})
 
 app.listen(port, () => {
   console.log(`Server started on port ${port}!`);
