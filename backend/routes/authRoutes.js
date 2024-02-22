@@ -23,20 +23,20 @@ router.post("/signup", (req, res) => {
       const userDetails =
         user.type == "recruiter"
           ? new Recruiter({
-              userId: user._id,
-              name: data.name,
-              contactNumber: data.contactNumber,
-              bio: data.bio,
-            })
+            userId: user._id,
+            name: data.name,
+            contactNumber: data.contactNumber,
+            bio: data.bio,
+          })
           : new JobApplicant({
-              userId: user._id,
-              name: data.name,
-              education: data.education,
-              skills: data.skills,
-              rating: data.rating,
-              resume: data.resume,
-              profile: data.profile,
-            });
+            userId: user._id,
+            name: data.name,
+            education: data.education,
+            skills: data.skills,
+            rating: data.rating,
+            resume: data.resume,
+            profile: data.profile,
+          });
 
       userDetails
         .save()
@@ -66,7 +66,7 @@ router.post("/signup", (req, res) => {
 });
 
 router.post("/login", (req, res, next) => {
-  console.log("An user want to log in");
+  console.log("Một người dùng muốn đăng nhập");
   passport.authenticate(
     "local",
     { session: false },
@@ -84,7 +84,7 @@ router.post("/login", (req, res, next) => {
         token: token,
         type: user.type,
       });
-      console.log("The user succeeded in logging in");
+      console.log("Người dùng đăng nhập thành công");
     }
   )(req, res, next);
 });
