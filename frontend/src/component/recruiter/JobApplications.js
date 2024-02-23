@@ -80,7 +80,7 @@ const FilterPopup = (props) => {
               item
               xs={9}
               justify="space-around"
-              // alignItems="center"
+            // alignItems="center"
             >
               <Grid item>
                 <FormControlLabel
@@ -586,14 +586,13 @@ const ApplicationTile = (props) => {
               readOnly
             />
           </Grid>
-          <Grid item>Ứng tuyển lúc: {appliedOn.toLocaleDateString()}</Grid>
+          <Grid item>Ứng tuyển lúc: {appliedOn.toLocaleDateString("vi-VN")}</Grid>
           <Grid item>
             Học vấn:{" "}
             {application.jobApplicant.education
               .map((edu) => {
-                return `${edu.institutionName} (${edu.startYear}-${
-                  edu.endYear ? edu.endYear : "Chưa hoàn thành"
-                })`;
+                return `${edu.institutionName} (${edu.startYear}-${edu.endYear ? edu.endYear : "Chưa hoàn thành"
+                  })`;
               })
               .join(", ")}
           </Grid>
@@ -638,7 +637,7 @@ const ApplicationTile = (props) => {
             variant="contained"
             color="primary"
             style={{ padding: "10px 50px" }}
-            // onClick={() => changeRating()}
+          // onClick={() => changeRating()}
           >
             {/* Submit */}
             Đồng ý

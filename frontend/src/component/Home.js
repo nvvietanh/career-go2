@@ -98,7 +98,18 @@ const JobTile = (props) => {
       });
   };
 
-  const deadline = new Date(job.deadline).toLocaleDateString();
+  const deadline = new Date(job.deadline).toLocaleDateString("vi-VN");
+  // let day = deadline0.getDate();
+  // console.log(day); // 23
+
+  // let month = deadline0.getMonth();
+  // console.log(month + 1); // 8
+
+  // let year = deadline0.getFullYear();
+  // console.log(year); // 2022
+
+  // let deadline = day + "/" + month + "/" + year;
+
 
   return (
     <Paper className={classes.jobTileOuter} elevation={3}>
@@ -206,7 +217,7 @@ const FilterPopup = (props) => {
               item
               xs={9}
               justify="space-around"
-              // alignItems="center"
+            // alignItems="center"
             >
               <Grid item>
                 <FormControlLabel
@@ -643,11 +654,11 @@ const Home = (props) => {
           alignItems="center"
         >
           <Grid item xs>
-            <Typography variant="h2">Jobs</Typography>
+            <Typography variant="h2">Công việc</Typography>
           </Grid>
           <Grid item xs>
             <TextField
-              label="Search Jobs"
+              label="Tìm công việc"
               value={searchOptions.query}
               onChange={(event) =>
                 setSearchOptions({
@@ -694,7 +705,7 @@ const Home = (props) => {
             })
           ) : (
             <Typography variant="h5" style={{ textAlign: "center" }}>
-              No jobs found
+              Không tìm thấy công việc nào
             </Typography>
           )}
         </Grid>

@@ -163,7 +163,7 @@ const JobTile = (props) => {
             Thời lượng :{" "}
             {job.duration !== 0 ? `${job.duration} month` : `Flexible`}
           </Grid>
-          <Grid item>Ngày đăng: {postedOn.toLocaleDateString()}</Grid>
+          <Grid item>Ngày đăng: {postedOn.toLocaleDateString("vi-VN")}</Grid>
           <Grid item>Số ứng viên tối đa: {job.maxApplicants}</Grid>
           <Grid item>
             Số vị trí còn lại:{" "}
@@ -375,7 +375,7 @@ const FilterPopup = (props) => {
               item
               xs={9}
               justify="space-around"
-              // alignItems="center"
+            // alignItems="center"
             >
               <Grid item>
                 <FormControlLabel

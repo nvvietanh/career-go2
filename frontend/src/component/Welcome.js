@@ -11,7 +11,7 @@ const Welcome = (props) => {
             <div className="row">
               <div className="col-md-8 col-md-offset-2 intro-text">
                 <h1>
-                  Welcome to JobPortal
+                  Welcome to CareerGo
                   <span></span>
                 </h1>
                 <br />

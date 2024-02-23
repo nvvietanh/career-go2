@@ -414,6 +414,7 @@ const Login = (props) => {
                 className={classes.inputBox}
                 label="Resume (.pdf)"
                 icon={<DescriptionIcon />}
+                type="file"
                 // value={files.resume}
                 // onChange={(event) =>
                 //   setFiles({
@@ -431,6 +432,7 @@ const Login = (props) => {
                 className={classes.inputBox}
                 label="Ảnh hồ sơ (.jpg/.png)"
                 icon={<FaceIcon />}
+                type="file"
                 // value={files.profileImage}
                 // onChange={(event) =>
                 //   setFiles({

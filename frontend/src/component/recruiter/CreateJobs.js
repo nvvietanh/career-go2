@@ -208,6 +208,7 @@ const CreateJobs = (props) => {
                   <TextField
                     label="Hạn nộp đơn ứng tuyển"
                     type="datetime-local"
+                    name="date"
                     value={jobDetails.deadline}
                     onChange={(event) => {
                       handleInput("deadline", event.target.value);

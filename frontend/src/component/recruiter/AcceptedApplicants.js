@@ -558,7 +558,7 @@ const ApplicationTile = (props) => {
           </Grid>
           <Grid item>Tên việc làm: {application.job.title}</Grid>
           <Grid item>Loại hình: {application.job.jobType}</Grid>
-          <Grid item>Ứng tuyển lúc: {appliedOn.toLocaleDateString()}</Grid>
+          <Grid item>Ứng tuyển lúc: {appliedOn.toLocaleDateString("vi-VN")}</Grid>
           <Grid item>
             SOP: {application.sop !== "" ? application.sop : "Không có"}
           </Grid>
