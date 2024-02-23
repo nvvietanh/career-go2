@@ -463,25 +463,36 @@ const ApplicationTile = (props) => {
       application.jobApplicant.resume &&
       application.jobApplicant.resume !== ""
     ) {
-      const address = `${server}${application.jobApplicant.resume}`;
-      console.log(address);
-      axios(address, {
-        method: "GET",
-        responseType: "blob",
-      })
-        .then((response) => {
-          const file = new Blob([response.data], { type: "application/pdf" });
-          const fileURL = URL.createObjectURL(file);
-          window.open(fileURL);
-        })
-        .catch((error) => {
-          console.log(error);
-          setPopup({
-            open: true,
-            severity: "error",
-            message: "Có lỗi xảy ra",
-          });
+      // const address = `${server}${application.jobApplicant.resume}`;
+      // console.log(address);
+      // axios(address, {
+      //   method: "GET",
+      //   responseType: "blob",
+      // })
+      //   .then((response) => {
+      //     const file = new Blob([response.data], { type: "application/pdf" });
+      //     const fileURL = URL.createObjectURL(file);
+      //     window.open(fileURL);
+      //   })
+      //   .catch((error) => {
+      //     console.log(error);
+      //     setPopup({
+      //       open: true,
+      //       severity: "error",
+      //       message: "Có lỗi xảy ra",
+      //     });
+      //   });
+      try {
+        const fileURL = application.jobApplicant.resume;
+        window.open(fileURL);
+      }
+      catch {
+        setPopup({
+          open: true,
+          severity: "error",
+          message: "Có lỗi xảy ra",
         });
+      }
     } else {
       setPopup({
         open: true,
@@ -536,7 +547,8 @@ const ApplicationTile = (props) => {
           }}
         >
           <Avatar
-            src={`${server}${application.jobApplicant.profile}`}
+            // src={`${server}${application.jobApplicant.profile}`}
+            src = {application.jobApplicant.profile}
             className={classes.avatar}
           />
         </Grid>
@@ -558,7 +570,7 @@ const ApplicationTile = (props) => {
           </Grid>
           <Grid item>Tên việc làm: {application.job.title}</Grid>
           <Grid item>Loại hình: {application.job.jobType}</Grid>
-          <Grid item>Ứng tuyển lúc: {appliedOn.toLocaleDateString("vi-VN")}</Grid>
+          <Grid item>Ứng tuyển lúc: {appliedOn.toLocaleDateString()}</Grid>
           <Grid item>
             SOP: {application.sop !== "" ? application.sop : "Không có"}
           </Grid>

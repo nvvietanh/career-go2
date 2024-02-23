@@ -3,6 +3,8 @@ const multer = require("multer");
 const fs = require("fs");
 const { v4: uuidv4 } = require("uuid");
 const { promisify } = require("util");
+const jwtAuth = require("../lib/jwtAuth");
+const JobApplicant = require("../db/JobApplicant");
 
 const pipeline = promisify(require("stream").pipeline);
 
@@ -10,61 +12,62 @@ const router = express.Router();
 
 const upload = multer();
 
-router.post("/resume", upload.single("file"), (req, res) => {
-  const { file } = req;
-  if (file.detectedFileExtension != ".pdf") {
-    res.status(400).json({
-      message: "Không đúng định dạng",
+router.put("/resume", jwtAuth, (req, res) => {
+  const user = req.user;
+  const data = req.body;
+  JobApplicant.findOne({ userId: user._id })
+    .then((applicant) => {
+      if (applicant == null) {
+        res.status(404).json({
+          message: "Người dùng không tồn tại",
+        });
+        return;
+      }
+      if (data.type == "resume" && data.content) {
+        applicant.resume = data.content;
+      }
+      applicant.save()
+        .then(() => {
+          res.json({
+            message: "Đã cập nhật Resume",
+          });
+        })
+        .catch((err) => {
+          res.status(400).json(err);
+        });
+    })
+    .catch((err) => {
+      res.status(400).json(err);
     });
-  } else {
-    const filename = `${uuidv4()}${file.detectedFileExtension}`;
-
-    pipeline(
-      file.stream,
-      fs.createWriteStream(`${__dirname}/../public/resume/${filename}`)
-    )
-      .then(() => {
-        res.send({
-          message: "Tải lên thành công",
-          url: `/host/resume/${filename}`,
-        });
-      })
-      .catch((err) => {
-        res.status(400).json({
-          message: "Lỗi khi tải lên",
-        });
-      });
-  }
 });
 
-router.post("/profile", upload.single("file"), (req, res) => {
-  const { file } = req;
-  if (
-    file.detectedFileExtension != ".jpg" &&
-    file.detectedFileExtension != ".png"
-  ) {
-    res.status(400).json({
-      message: "Không đúng định dạng",
+router.put("/profile", jwtAuth, (req, res) => {
+  const user = req.user;
+  const data = req.body;
+  JobApplicant.findOne({ userId: user._id })
+    .then((applicant) => {
+      if (applicant == null) {
+        res.status(404).json({
+          message: "Người dùng không tồn tại",
+        });
+        return;
+      }
+      if (data.type == "profile" && data.content) {
+        applicant.profile = data.content;
+      }
+      applicant.save()
+        .then(() => {
+          res.json({
+            message: "Đã cập nhật ảnh hồ sơ",
+          });
+        })
+        .catch((err) => {
+          res.status(400).json(err);
+        });
+    })
+    .catch((err) => {
+      res.status(400).json(err);
     });
-  } else {
-    const filename = `${uuidv4()}${file.detectedFileExtension}`;
-
-    pipeline(
-      file.stream,
-      fs.createWriteStream(`${__dirname}/../public/profile/${filename}`)
-    )
-      .then(() => {
-        res.send({
-          message: "Tải ảnh lên thành công",
-          url: `/host/profile/${filename}`,
-        });
-      })
-      .catch((err) => {
-        res.status(400).json({
-          message: "Lỗi khi tải lên",
-        });
-      });
-  }
 });
 
 module.exports = router;

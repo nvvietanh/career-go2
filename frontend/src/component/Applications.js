@@ -131,6 +131,16 @@ const ApplicationTile = (props) => {
     finished: "#4EA5D9",
   };
 
+  const stats = {
+    applied: "đã ứng tuyển",
+    shortlisted: "đã sơ tuyển",
+    accepted: "đã cấp nhận",
+    rejected: "đã từ chối",
+    deleted: "đã xóa",
+    cancelled: "đã hủy",
+    finished: "đã hoàn thành",
+  }
+
   return (
     <Paper className={classes.jobTileOuter} elevation={3}>
       <Grid container>
@@ -167,7 +177,8 @@ const ApplicationTile = (props) => {
                 color: "#ffffff",
               }}
             >
-              {application.status}
+              {/* {application.status} */}
+              {stats[application.status]}
             </Paper>
           </Grid>
           {application.status === "accepted" ||
@@ -214,7 +225,7 @@ const ApplicationTile = (props) => {
             style={{ padding: "10px 50px" }}
             onClick={() => changeRating()}
           >
-            Submit
+            Nộp
           </Button>
         </Paper>
       </Modal>
