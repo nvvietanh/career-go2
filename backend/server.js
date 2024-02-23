@@ -7,7 +7,8 @@ const fs = require("fs");
 
 // MongoDB
 mongoose
-  .connect("mongodb://localhost:27017/jobPortal", {
+  // .connect("mongodb://127.0.0.1:27017/jobPortal", {
+  .connect("mongodb+srv://vietanh261:26012003@jobportal.ufitfdo.mongodb.net/", {
     useNewUrlParser: true,
     useUnifiedTopology: true,
     useCreateIndex: true,
@@ -28,7 +29,7 @@ if (!fs.existsSync("./public/profile")) {
 }
 
 const app = express();
-const port = 4444;
+const port = 5000;
 
 app.use(bodyParser.json()); // support json encoded bodies
 app.use(bodyParser.urlencoded({ extended: true })); // support encoded bodies
@@ -43,6 +44,10 @@ app.use("/auth", require("./routes/authRoutes"));
 app.use("/api", require("./routes/apiRoutes"));
 app.use("/upload", require("./routes/uploadRoutes"));
 app.use("/host", require("./routes/downloadRoutes"));
+
+app.get("/", (req, res) => {
+  res.send("API is running...");
+})
 
 app.listen(port, () => {
   console.log(`Server started on port ${port}!`);

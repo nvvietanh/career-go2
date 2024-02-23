@@ -9,7 +9,7 @@ router.get("/resume/:file", (req, res) => {
   fs.access(address, fs.F_OK, (err) => {
     if (err) {
       res.status(404).json({
-        message: "File not found",
+        message: "Không tìm thấy tệp",
       });
       return;
     }
@@ -22,7 +22,7 @@ router.get("/profile/:file", (req, res) => {
   fs.access(address, fs.F_OK, (err) => {
     if (err) {
       res.status(404).json({
-        message: "File not found",
+        message: "Không tìm thấy tệp",
       });
       return;
     }

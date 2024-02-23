@@ -11,7 +11,7 @@ const Logout = (props) => {
     setPopup({
       open: true,
       severity: "success",
-      message: "Logged out successfully",
+      message: "Đăng xuất thành công",
     });
   }, []);
   return <Redirect to="/login" />;

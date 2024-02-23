@@ -73,14 +73,14 @@ const FilterPopup = (props) => {
         <Grid container direction="column" alignItems="center" spacing={3}>
           <Grid container item alignItems="center">
             <Grid item xs={3}>
-              Application Status
+              Trạng thái đơn ứng tuyển
             </Grid>
             <Grid
               container
               item
               xs={9}
               justify="space-around"
-              // alignItems="center"
+            // alignItems="center"
             >
               <Grid item>
                 <FormControlLabel
@@ -99,7 +99,8 @@ const FilterPopup = (props) => {
                       }}
                     />
                   }
-                  label="Rejected"
+                  // label="Rejected"
+                  label="Đã từ chối"
                 />
               </Grid>
               <Grid item>
@@ -119,7 +120,8 @@ const FilterPopup = (props) => {
                       }}
                     />
                   }
-                  label="Applied"
+                  // label="Applied"
+                  label="Đã ứng tuyển"
                 />
               </Grid>
               <Grid item>
@@ -139,14 +141,15 @@ const FilterPopup = (props) => {
                       }}
                     />
                   }
-                  label="Shortlisted"
+                  // label="Shortlisted"
+                  label="Đã sơ tuyển"
                 />
               </Grid>
             </Grid>
           </Grid>
           <Grid container item alignItems="center">
             <Grid item xs={3}>
-              Sort
+              Sắp xếp
             </Grid>
             <Grid item container direction="row" xs={9}>
               <Grid
@@ -178,7 +181,7 @@ const FilterPopup = (props) => {
                 </Grid>
                 <Grid item>
                   <label for="name">
-                    <Typography>Name</Typography>
+                    <Typography>Tên</Typography>
                   </label>
                 </Grid>
                 <Grid item>
@@ -234,7 +237,10 @@ const FilterPopup = (props) => {
                 </Grid>
                 <Grid item>
                   <label for="dateOfApplication">
-                    <Typography>Date of Application</Typography>
+                    <Typography>
+                      {/* Date of Application */}
+                      Ngày
+                    </Typography>
                   </label>
                 </Grid>
                 <Grid item>
@@ -290,7 +296,7 @@ const FilterPopup = (props) => {
                 </Grid>
                 <Grid item>
                   <label for="rating">
-                    <Typography>Rating</Typography>
+                    <Typography>Đánh giá</Typography>
                   </label>
                 </Grid>
                 <Grid item>
@@ -328,7 +334,7 @@ const FilterPopup = (props) => {
               style={{ padding: "10px 50px" }}
               onClick={() => getData()}
             >
-              Apply
+              Áp dụng
             </Button>
           </Grid>
         </Grid>
@@ -387,7 +393,8 @@ const ApplicationTile = (props) => {
       setPopup({
         open: true,
         severity: "error",
-        message: "No resume found",
+        // message: "No resume found",
+        message: "Không tìm thấy Resume"
       });
     }
   };
@@ -434,7 +441,8 @@ const ApplicationTile = (props) => {
             }}
             onClick={() => updateStatus("shortlisted")}
           >
-            Shortlist
+            {/* Shortlist */}
+            Sơ tuyển
           </Button>
         </Grid>
         <Grid item xs>
@@ -446,7 +454,7 @@ const ApplicationTile = (props) => {
             }}
             onClick={() => updateStatus("rejected")}
           >
-            Reject
+            Từ chối
           </Button>
         </Grid>
       </>
@@ -462,7 +470,7 @@ const ApplicationTile = (props) => {
             }}
             onClick={() => updateStatus("accepted")}
           >
-            Accept
+            Chấp nhận
           </Button>
         </Grid>
         <Grid item xs>
@@ -474,7 +482,7 @@ const ApplicationTile = (props) => {
             }}
             onClick={() => updateStatus("rejected")}
           >
-            Reject
+            Từ chối
           </Button>
         </Grid>
       </>
@@ -489,7 +497,8 @@ const ApplicationTile = (props) => {
               color: "#ffffff",
             }}
           >
-            Rejected
+            {/* Rejected */}
+            Đã từ chối
           </Paper>
         </Grid>
       </>
@@ -504,7 +513,8 @@ const ApplicationTile = (props) => {
               color: "#ffffff",
             }}
           >
-            Accepted
+            {/* Accepted */}
+            Đã chấp nhận
           </Paper>
         </Grid>
       </>
@@ -519,7 +529,8 @@ const ApplicationTile = (props) => {
               color: "#ffffff",
             }}
           >
-            Cancelled
+            {/* Cancelled */}
+            Đã hủy
           </Paper>
         </Grid>
       </>
@@ -534,7 +545,8 @@ const ApplicationTile = (props) => {
               color: "#ffffff",
             }}
           >
-            Finished
+            {/* Finished */}
+            Đã hoàn thành
           </Paper>
         </Grid>
       </>
@@ -574,19 +586,18 @@ const ApplicationTile = (props) => {
               readOnly
             />
           </Grid>
-          <Grid item>Applied On: {appliedOn.toLocaleDateString()}</Grid>
+          <Grid item>Ứng tuyển lúc: {appliedOn.toLocaleDateString("vi-VN")}</Grid>
           <Grid item>
-            Education:{" "}
+            Học vấn:{" "}
             {application.jobApplicant.education
               .map((edu) => {
-                return `${edu.institutionName} (${edu.startYear}-${
-                  edu.endYear ? edu.endYear : "Ongoing"
-                })`;
+                return `${edu.institutionName} (${edu.startYear}-${edu.endYear ? edu.endYear : "Chưa hoàn thành"
+                  })`;
               })
               .join(", ")}
           </Grid>
           <Grid item>
-            SOP: {application.sop !== "" ? application.sop : "Not Submitted"}
+            SOP: {application.sop !== "" ? application.sop : "Không có"}
           </Grid>
           <Grid item>
             {application.jobApplicant.skills.map((skill) => (
@@ -602,7 +613,7 @@ const ApplicationTile = (props) => {
               color="primary"
               onClick={() => getResume()}
             >
-              Download Resume
+              Tải Resume về
             </Button>
           </Grid>
           <Grid item container xs>
@@ -626,9 +637,10 @@ const ApplicationTile = (props) => {
             variant="contained"
             color="primary"
             style={{ padding: "10px 50px" }}
-            // onClick={() => changeRating()}
+          // onClick={() => changeRating()}
           >
-            Submit
+            {/* Submit */}
+            Đồng ý
           </Button>
         </Paper>
       </Modal>
@@ -735,7 +747,7 @@ const JobApplications = (props) => {
         style={{ padding: "30px", minHeight: "93vh" }}
       >
         <Grid item>
-          <Typography variant="h2">Applications</Typography>
+          <Typography variant="h2">Danh sách đơn ứng tuyển</Typography>
         </Grid>
         <Grid item>
           <IconButton onClick={() => setFilterOpen(true)}>
@@ -760,7 +772,7 @@ const JobApplications = (props) => {
             ))
           ) : (
             <Typography variant="h5" style={{ textAlign: "center" }}>
-              No Applications Found
+              Không có đơn ứng tuyển nào
             </Typography>
           )}
         </Grid>

@@ -110,7 +110,8 @@ const Login = (props) => {
       <Grid container direction="column" spacing={4} alignItems="center">
         <Grid item>
           <Typography variant="h3" component="h2">
-            Login
+            {/* Login */}
+            Đăng nhập
           </Typography>
         </Grid>
         <Grid item>
@@ -125,7 +126,8 @@ const Login = (props) => {
         </Grid>
         <Grid item>
           <PasswordInput
-            label="Password"
+            // label="Password"
+            label="Mật khẩu"
             value={loginDetails.password}
             onChange={(event) => handleInput("password", event.target.value)}
             className={classes.inputBox}
@@ -138,7 +140,8 @@ const Login = (props) => {
             onClick={() => handleLogin()}
             className={classes.submitButton}
           >
-            Login
+            {/* Login */}
+            Đăng nhập
           </Button>
         </Grid>
       </Grid>

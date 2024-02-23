@@ -11,6 +11,10 @@ const Rating = require("../db/Rating");
 
 const router = express.Router();
 
+router.get("/testApi", (req, res) => {
+  res.send("API is running...");
+})
+
 // To add new job
 router.post("/jobs", jwtAuth, (req, res) => {
   const user = req.user;

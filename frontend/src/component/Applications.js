@@ -76,7 +76,8 @@ const ApplicationTile = (props) => {
         setPopup({
           open: true,
           severity: "error",
-          message: "Error",
+          // message: "Error",
+          message: "Có lỗi xảy ra"
         });
       });
   };
@@ -97,7 +98,8 @@ const ApplicationTile = (props) => {
         setPopup({
           open: true,
           severity: "success",
-          message: "Rating updated successfully",
+          // message: "Rating updated successfully",
+          message: "Cập nhật đánh giá thành công"
         });
         fetchRating();
         setOpen(false);
@@ -136,24 +138,24 @@ const ApplicationTile = (props) => {
           <Grid item>
             <Typography variant="h5">{application.job.title}</Typography>
           </Grid>
-          <Grid item>Posted By: {application.recruiter.name}</Grid>
-          <Grid item>Role : {application.job.jobType}</Grid>
-          <Grid item>Salary : &#8377; {application.job.salary} per month</Grid>
+          <Grid item>Đăng bởi: {application.recruiter.name}</Grid>
+          <Grid item>Loại hình : {application.job.jobType}</Grid>
+          <Grid item>Lương : &#8363; {application.job.salary} mỗi tháng</Grid>
           <Grid item>
-            Duration :{" "}
+            Thời lượng :{" "}
             {application.job.duration !== 0
-              ? `${application.job.duration} month`
-              : `Flexible`}
+              ? `${application.job.duration} tháng`
+              : `Linh hoạt`}
           </Grid>
           <Grid item>
             {application.job.skillsets.map((skill) => (
               <Chip label={skill} style={{ marginRight: "2px" }} />
             ))}
           </Grid>
-          <Grid item>Applied On: {appliedOn.toLocaleDateString()}</Grid>
+          <Grid item>Ứng tuyển lúc: {appliedOn.toLocaleDateString()}</Grid>
           {application.status === "accepted" ||
           application.status === "finished" ? (
-            <Grid item>Joined On: {joinedOn.toLocaleDateString()}</Grid>
+            <Grid item>Tham gia lúc: {joinedOn.toLocaleDateString()}</Grid>
           ) : null}
         </Grid>
         <Grid item container direction="column" xs={3}>
@@ -180,7 +182,7 @@ const ApplicationTile = (props) => {
                   setOpen(true);
                 }}
               >
-                Rate Job
+                Đánh giá việc làm
               </Button>
             </Grid>
           ) : null}
@@ -245,7 +247,7 @@ const Applications = (props) => {
         setPopup({
           open: true,
           severity: "error",
-          message: "Error",
+          message: "Có lỗi xảy ra",
         });
       });
   };
@@ -259,7 +261,7 @@ const Applications = (props) => {
       style={{ padding: "30px", minHeight: "93vh" }}
     >
       <Grid item>
-        <Typography variant="h2">Applications</Typography>
+        <Typography variant="h2">Đơn ứng tuyển</Typography>
       </Grid>
       <Grid
         container
@@ -278,7 +280,8 @@ const Applications = (props) => {
           ))
         ) : (
           <Typography variant="h5" style={{ textAlign: "center" }}>
-            No Applications Found
+            {/* No Applications Found */}
+            Không tìm thấy đơn ứng tuyển nào
           </Typography>
         )}
       </Grid>

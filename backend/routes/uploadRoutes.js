@@ -14,7 +14,7 @@ router.post("/resume", upload.single("file"), (req, res) => {
   const { file } = req;
   if (file.detectedFileExtension != ".pdf") {
     res.status(400).json({
-      message: "Invalid format",
+      message: "Không đúng định dạng",
     });
   } else {
     const filename = `${uuidv4()}${file.detectedFileExtension}`;
@@ -25,13 +25,13 @@ router.post("/resume", upload.single("file"), (req, res) => {
     )
       .then(() => {
         res.send({
-          message: "File uploaded successfully",
+          message: "Tải lên thành công",
           url: `/host/resume/${filename}`,
         });
       })
       .catch((err) => {
         res.status(400).json({
-          message: "Error while uploading",
+          message: "Lỗi khi tải lên",
         });
       });
   }
@@ -44,7 +44,7 @@ router.post("/profile", upload.single("file"), (req, res) => {
     file.detectedFileExtension != ".png"
   ) {
     res.status(400).json({
-      message: "Invalid format",
+      message: "Không đúng định dạng",
     });
   } else {
     const filename = `${uuidv4()}${file.detectedFileExtension}`;
@@ -55,13 +55,13 @@ router.post("/profile", upload.single("file"), (req, res) => {
     )
       .then(() => {
         res.send({
-          message: "Profile image uploaded successfully",
+          message: "Tải ảnh lên thành công",
           url: `/host/profile/${filename}`,
         });
       })
       .catch((err) => {
         res.status(400).json({
-          message: "Error while uploading",
+          message: "Lỗi khi tải lên",
         });
       });
   }
