@@ -89,7 +89,7 @@ const JobTile = (props) => {
   const handleCloseUpdate = () => {
     setOpenUpdate(false);
   };
-
+//
   const handleDelete = () => {
     console.log(job._id);
     axios
