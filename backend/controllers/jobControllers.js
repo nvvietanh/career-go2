@@ -466,9 +466,9 @@ const fetchJobApplications = (req, res) => {
 
 // Lấy danh sách applicant cho một job hoặc toàn bộ job (dành cho recruiter)
 const fetchJobApplicants = (req, res) => {
-  console.log("im here");
   const user = req.user;
   if (user.type === "recruiter") {
+    // các tham số lọc
     let findParams = {
       recruiterId: user._id,
     };
@@ -491,12 +491,12 @@ const fetchJobApplicants = (req, res) => {
         };
       }
     }
+    
+    // tham số sắp xếp
     let sortParams = {};
-
     if (!req.query.asc && !req.query.desc) {
       sortParams = { _id: 1 };
     }
-
     if (req.query.asc) {
       if (Array.isArray(req.query.asc)) {
         req.query.asc.map((key) => {
@@ -512,7 +512,6 @@ const fetchJobApplicants = (req, res) => {
         };
       }
     }
-
     if (req.query.desc) {
       if (Array.isArray(req.query.desc)) {
         req.query.desc.map((key) => {
@@ -529,16 +528,16 @@ const fetchJobApplicants = (req, res) => {
       }
     }
 
-    Application.aggregate([
+    Application.aggregate([ // với mỗi document application có userId = X
       {
-        $lookup: {
+        $lookup: { // tìm tất cả document applicant có userId = X, đặt trong 1 array, và gán array đó vào cuối document application với thuộc tính "jobApplicant" 
           from: "jobapplicantinfos",
           localField: "userId",
           foreignField: "userId",
           as: "jobApplicant",
         },
       },
-      { $unwind: "$jobApplicant" },
+      { $unwind: "$jobApplicant" }, // tách document application thành nhiều document khác nhau, trong đó mỗi document mới có thuộc tính "jobApplicant" là 1 phần tử trong thuộc tính array "jobApplication" của document ban đầu
       {
         $lookup: {
           from: "jobs",
@@ -548,13 +547,13 @@ const fetchJobApplicants = (req, res) => {
         },
       },
       { $unwind: "$job" },
-      { $match: findParams },
-      { $sort: sortParams },
+      { $match: findParams }, // khớp với giá trị các tham số lọc
+      { $sort: sortParams }, // sắp xếp theo giá trị các tham số sắp xếp
     ])
       .then((applications) => {
         if (applications.length === 0) {
           res.status(404).json({
-            message: "No applicants found",
+            message: "Không tìm thấy đơn ứng tuyển",
           });
           return;
         }
@@ -565,7 +564,7 @@ const fetchJobApplicants = (req, res) => {
       });
   } else {
     res.status(400).json({
-      message: "You are not allowed to access applicants list",
+      message: "Không đủ quyền truy cập danh sách ứng viên",
     });
   }
 };

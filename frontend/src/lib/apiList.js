@@ -1,7 +1,8 @@
 // export const server = "http://localhost:5000";
-// export const server = "https://career-go-api.vercel.app"\
 // export const server = "https://career-go.onrender.com";
-export const server = "https://career-go2.onrender.com/";
+// export const server = "https://career-go2.onrender.com/";
+
+export const server = process.env.REACT_APP_SERVER_URL;
 
 const apiList = {
   login: `${server}/auth/login`,

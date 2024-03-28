@@ -46,7 +46,6 @@ app.use("/api/applications", require("./routes/applicationRoutes"));
 app.use("/api/rating", require("./routes/ratingRoutes"));
 app.use("/api/applicants", require("./routes/applicantRoutes"));
 
-// app.use("/api", require("./routes/apiRoutes"));
 // app.use("/upload", require("./routes/uploadRoutes"));
 
 app.use((req, res, next) => {
