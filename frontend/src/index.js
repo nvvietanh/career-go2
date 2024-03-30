@@ -3,13 +3,12 @@ import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
-import { PopUpProvider } from './context/PopupContext';
+// import { PopUpProvider } from './context/PopupContext';
 
+// ReactJS 17.x
 ReactDOM.render(
   <React.StrictMode>\
-    {/* <PopUpProvider> */}
     <App />
-    {/* </PopUpProvider> */}
   </React.StrictMode>,
   document.getElementById('root')
 );

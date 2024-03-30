@@ -1,7 +1,6 @@
 const passport = require("passport");
 const jwt = require("jsonwebtoken");
 
-
 const User = require("../models/User");
 const JobApplicant = require("../models/JobApplicant");
 const Recruiter = require("../models/Recruiter");

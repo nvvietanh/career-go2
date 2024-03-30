@@ -1,6 +1,7 @@
 const Rating = require("../models/Rating");
 const Application = require("../models/Application");
 const JobApplicant = require("../models/JobApplicant");
+const Job = require("../models/Job");
 const mongoose = require("mongoose");
 
 // thêm hoặc cập nhật đánh giá // Sau khi thêm đánh giá phải cập nhật luôn

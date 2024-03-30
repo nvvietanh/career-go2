@@ -488,6 +488,7 @@ const Signup = (props) => {
                 country={"in"}
                 value={phone}
                 onChange={(phone) => setPhone(phone)}
+                // defaultErrorMessage="Số điện thoại không hợp lệ"
               />
             </Grid>
           </>

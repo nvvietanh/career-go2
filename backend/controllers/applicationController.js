@@ -1,4 +1,6 @@
 const Application = require("../models/Application");
+const Job = require("../models/Job");
+
 
 // Applicant đọc tất cả đơn ứng tuyển của mình/Recruiter đọc tất cả đơn ứng tuyển của job của mình.
 const fetchApplicaions = (req, res) => {
@@ -67,10 +69,7 @@ const updateApplicationStatus = (req, res) => {
 
   if (user.type === "recruiter") {
     if (status === "accepted") {
-
-      // lấy id job từ application để lấy số vị trí tối đa của job
-      // lấy số application đã được chấp nhận
-      // lưu nếu thỏa mãn điều kiện
+      
       Application.findOne({
         _id: id,
         recruiterId: user._id,
@@ -82,7 +81,7 @@ const updateApplicationStatus = (req, res) => {
             });
             return;
           }
-
+          console.log("im here")
           Job.findOne({
             _id: application.jobId,
             userId: user._id,
@@ -114,7 +113,13 @@ const updateApplicationStatus = (req, res) => {
                         },
                         userId: application.userId,
                         status: {
-                          $nin: [ "rejected", "deleted", "cancelled", "accepted","finished", ],
+                          $nin: [
+                            "rejected",
+                            "deleted",
+                            "cancelled",
+                            "accepted",
+                            "finished",
+                          ],
                         },
                       },
                       {

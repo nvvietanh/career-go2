@@ -26,7 +26,7 @@ const useStyles = makeStyles((theme) => ({
     justifyContent: "center",
     alignItems: "center",
     minHeight: "98vh",
-    paddingTop: "64px",
+    paddingTop: "44px",
     boxSizing: "border-box",
     width: "100%",
     overflow: "hidden"

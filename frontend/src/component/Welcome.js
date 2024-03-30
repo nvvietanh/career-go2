@@ -1,8 +1,10 @@
 import { Grid, Typography } from "@material-ui/core";
+import { useHistory } from "react-router-dom";
 import "../styles/welcomeStyles.css";
 import isAuth from "../lib/isAuth";
 
 const Welcome = (props) => {
+  const history = useHistory();
   return (
     <header id="header">
       <div className="intro">
@@ -17,18 +19,14 @@ const Welcome = (props) => {
                 <br />
                 <br />
                 <p>Chọn đúng công việc, khai sáng tương lai</p>
-                {
-                  !isAuth ?
-                    <button className="button-29">
-                      <a
-                        href="/login"
-                        className="btn btn-custom btn-lg page-scroll"
-                        >
-                        Bắt đầu
-                      </a>{" "}
-                    </button>
-                  : <></>
-                }
+                {!isAuth() && <button className="button-29" onClick={() => history.push("/login")}>
+                  {/* <a
+                    href="/login"
+                    className="btn btn-custom btn-lg page-scroll"
+                  > */}
+                    Bắt đầu
+                  {/* </a>{" "} */}
+                </button>}
               </div>
             </div>
           </div>
