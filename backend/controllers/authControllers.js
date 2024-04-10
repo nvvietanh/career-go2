@@ -1,0 +1,85 @@
+const passport = require("passport");
+const jwt = require("jsonwebtoken");
+
+const User = require("../models/User");
+const JobApplicant = require("../models/JobApplicant");
+const Recruiter = require("../models/Recruiter");
+
+const userSignup = (req, res) => {
+  const data = req.body;
+  let user = new User({
+    email: data.email,
+    password: data.password,
+    type: data.type,
+  });
+
+  user
+    .save()
+    .then(() => {
+      const userDetails =
+        user.type == "recruiter"
+          ? new Recruiter({
+            userId: user._id,
+            name: data.name,
+            contactNumber: data.contactNumber,
+            bio: data.bio,
+          })
+          : new JobApplicant({
+            userId: user._id,
+            name: data.name,
+            education: data.education,
+            skills: data.skills,
+            rating: data.rating,
+            resume: data.resume,
+            profile: data.profile,
+          });
+
+      userDetails
+        .save()
+        .then(() => {
+          // Token
+          const token = jwt.sign({ _id: user._id }, process.env.JWT_SECRET);
+          res.json({
+            token: token,
+            type: user.type,
+          });
+        })
+        .catch((err) => {
+          user
+            .delete()
+            .then(() => { res.status(400).json(err); })
+            .catch((err) => { res.json({ error: err }); });
+          err;
+        });
+    })
+    .catch((err) => {
+      res.status(400).json(err);
+    });
+};
+
+const userLogin = (req, res, next) => {
+  console.log("Một người dùng muốn đăng nhập");
+  passport.authenticate(
+    "local",
+    { session: false }, // JWT Authen cho mỗi lần gọi API, không cần tạo session ở BE
+    function (err, user, info) {
+      if (err) {
+        return next(err);
+      }
+      if (!user) {
+        res.status(401).json(info);
+        return;
+      }
+      // Token
+      const token = jwt.sign({ _id: user._id }, process.env.JWT_SECRET);
+      res.json({
+        token: token,
+        userId: user._id,
+        type: user.type,
+      });
+      console.log("Người dùng đăng nhập thành công");
+    }
+  )(req, res, next);
+};
+
+module.exports = { userSignup, userLogin };
