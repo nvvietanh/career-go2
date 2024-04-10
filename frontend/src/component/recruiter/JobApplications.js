@@ -663,8 +663,7 @@ const ApplicationTile = (props) => {
                 "?subject=Phản hồi đơn ứng tuyển của " + application.jobApplicant.name + " đến công việc "
                 + application.job.title + " đăng bởi " + application.recruiter.name + " trên website CareerGo"
                 + "&body=Xin chào " + application.jobApplicant.name + ", %0D%0A%0D%0A"
-                + "Chúng tôi rất cảm ơn bạn đã quan tâm và ứng tuyển đến công việc "
-                + application.job.title + " của chúng tôi qua website CareerGo.%0D%0A%0D%0A"
+                + "Chúng tôi rất cảm ơn bạn đã quan tâm và ứng tuyển đến công việc " + application.job.title + " của chúng tôi qua website CareerGo.%0D%0A%0D%0A"
                 + "Để tiếp tục quá trình tuyển dụng, chúng tôi mong muốn mời bạn tham gia một cuộc họp để thảo luận thêm một số vấn đề.%0D%0A"
                 + "Thời gian: %0D%0A"
                 + "Link cuộc họp: %0D%0A%0D%0A"
@@ -729,7 +728,7 @@ const ApplicationTile = (props) => {
       >
         <Paper
           style={{
-            padding: "20px",
+            padding: "15px",
             outline: "none",
             display: "flex",
             flexDirection: "column",
@@ -738,12 +737,26 @@ const ApplicationTile = (props) => {
             alignItems: "center",
             minHeight: "80%",
             height: "80%",
-            width: "30%"
+            width: "40%"
           }}
         >
-          <Typography variant="h4" style={{ marginBottom: "10px" }}>
-            Chat với {application.jobApplicant.name}
-          </Typography>
+          <Grid container direction="row" justifyContent="space-between" alignItems="center" style={{width:"100%", maxWidth:"100%"}}>
+            <Grid item xs>
+              <Typography variant="h5" style={{ marginBottom: "10px" }}>
+                Chat với {application.jobApplicant.name}
+              </Typography>
+            </Grid>
+            <Grid item>
+              <Button
+                variant="contained"
+                color="primary"
+                // style={{ padding: "10px 50px" }}
+                onClick={() => handleCloseChat()}
+              >
+                Đóng
+              </Button>
+            </Grid>
+          </Grid>
           <SingleChat rcvUser={application.jobApplicant}/>
         </Paper>
       </Modal>
@@ -764,7 +777,7 @@ const ApplicationTile = (props) => {
         >
           <Grid container direction="row" justifyContent="space-between" alignItems="center" style={{width:"100%", maxWidth:"100%"}}>
             <Grid item xs>
-              <Typography variant="h4" style={{ marginBottom: "10px" }}>
+              <Typography variant="h5" style={{ marginBottom: "10px" }}>
                 Resume của {application.jobApplicant.name}
               </Typography>
             </Grid>

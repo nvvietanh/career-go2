@@ -233,7 +233,7 @@ const SingleChat = (props) => {
           paddingBottom:"5px",
           justifyContent: "flex-end",
           flexDirection: "column",
-          overflowY: "hidden"
+          overflowY: "hidden",
         }}
         // }}
       >
@@ -245,30 +245,6 @@ const SingleChat = (props) => {
         }}>
           <ScrollableChat user={user} messages={messages}/>
         </div>
-        {/* <FormControl> */}
-          {/* <InputLabel htmlFor="my-input">Email address</InputLabel> */}
-          {/* <Input id="my-input" aria-describedby="my-helper-text" /> */}
-          {/* <FormHelperText id="my-helper-text">We'll never share your email.</FormHelperText> */}
-        {/* </FormControl> */}
-        {/* <Box
-          component="form"
-          sx={{
-            '& > :not(style)': { m: 1 },
-          }}
-          noValidate
-          autoComplete="off"
-        >
-        </Box> */}
-          {/* <FormControl bgcolor="white" on>
-            <InputLabel 
-              width="100%"
-              >Soạn tin</InputLabel>
-            <OutlinedInput
-              id="component-outlined"
-              // defaultValue="Composed TextField"
-              label="Soạn tin"
-              />
-          </FormControl> */}
       </Box>
       {/* <Grid item> */}
       {/* </Grid> */}

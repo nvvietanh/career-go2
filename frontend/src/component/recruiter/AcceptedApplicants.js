@@ -744,7 +744,7 @@ const ApplicationTile = (props) => {
       >
         <Paper
           style={{
-            padding: "20px",
+            padding: "15px",
             outline: "none",
             display: "flex",
             flexDirection: "column",
@@ -753,12 +753,26 @@ const ApplicationTile = (props) => {
             alignItems: "center",
             minHeight: "80%",
             height: "80%",
-            width: "30%"
+            width: "40%"
           }}
         >
-          <Typography variant="h4" style={{ marginBottom: "10px" }}>
-            Chat với {application.jobApplicant.name}
-          </Typography>
+          <Grid container direction="row" justifyContent="space-between" alignItems="center" style={{width:"100%", maxWidth:"100%"}}>
+            <Grid item xs>
+              <Typography variant="h5" style={{ marginBottom: "10px" }}>
+                Chat với {application.jobApplicant.name}
+              </Typography>
+            </Grid>
+            <Grid item>
+              <Button
+                variant="contained"
+                color="primary"
+                // style={{ padding: "10px 50px" }}
+                onClick={() => handleCloseChat()}
+              >
+                Đóng
+              </Button>
+            </Grid>
+          </Grid>
           <SingleChat rcvUser={application.jobApplicant}/>
         </Paper>
       </Modal>

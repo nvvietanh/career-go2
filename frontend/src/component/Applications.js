@@ -296,21 +296,38 @@ const ApplicationTile = (props) => {
       >
         <Paper
           style={{
-            padding: "20px",
+            padding: "15px",
             outline: "none",
             display: "flex",
             flexDirection: "column",
             justifyContent: "center",
-            minWidth: "30%",
+            minWidth: "300px",
             alignItems: "center",
             minHeight: "80%",
             height: "80%",
-            width: "30%"
+            width: "40%"
           }}
         >
-          <Typography variant="h4" style={{ marginBottom: "10px" }}>
+          {/* <Typography variant="h4" style={{ marginBottom: "10px" }}>
             Chat với {application.recruiter.name}
-          </Typography>
+          </Typography> */}
+          <Grid container direction="row" justifyContent="space-between" alignItems="center" style={{width:"100%", maxWidth:"100%"}}>
+            <Grid item xs>
+              <Typography variant="h5" style={{ marginBottom: "10px" }}>
+                Chat với {application.recruiter.name}
+              </Typography>
+            </Grid>
+            <Grid item>
+              <Button
+                variant="contained"
+                color="primary"
+                // style={{ padding: "10px 50px" }}
+                onClick={() => handleCloseChat()}
+              >
+                Đóng
+              </Button>
+            </Grid>
+          </Grid>
           <SingleChat applicationId={application._id} rcvUser={application.recruiter}/>
         </Paper>
       </Modal>
