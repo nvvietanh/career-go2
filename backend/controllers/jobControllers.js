@@ -1,6 +1,7 @@
 const mongoose = require("mongoose");
 const Job = require("../models/Job");
 const Application = require("../models/Application");
+const Email = require("mongoose-type-email");
 
 
 // Thêm 1 job (chỉ recruiter)
@@ -538,6 +539,29 @@ const fetchJobApplicants = (req, res) => {
         },
       },
       { $unwind: "$jobApplicant" }, // tách document application thành nhiều document khác nhau, trong đó mỗi document mới có thuộc tính "jobApplicant" là 1 phần tử trong thuộc tính array "jobApplication" của document ban đầu
+      {
+        $lookup: {
+          from: "userauths",
+          localField: "userId",
+          foreignField: "_id",
+          pipeline: [
+            { $project : {
+              _id : 0,
+              email : 1
+            }}
+          ],
+          as: "jobApplicantMail"
+        }
+      },
+      // {
+      //   $project: {
+      //     "_id" : 0,
+      //     "email": 1,
+      //     "password" : 0,
+      //     "type" : 0
+      //   }
+      // },
+      { $unwind: "$jobApplicantMail" },
       {
         $lookup: {
           from: "jobs",

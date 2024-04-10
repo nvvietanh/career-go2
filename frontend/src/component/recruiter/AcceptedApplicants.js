@@ -631,18 +631,32 @@ const ApplicationTile = (props) => {
               Đánh giá ứng viên
             </Button>
           </Grid>
-          <Grid item>
-            <Button
-              variant="contained"
-              className={classes.statusBlock}
-              color="primary"
-              onClick={() => handleOpenChat(application.jobApplicant)}
-              style={{
-                background: "#09BC8A",
-              }}
-            >
-              Chat với ứng viên
-            </Button>
+          <Grid item container direction="row" style={{ paddingTop : "2px" }} spacing={"2px"}>
+            <Grid item style={{ paddingRight : "2px"}}>
+              <a href="mailto:someone@example.com" style={{ textDecoration : "none"}}>
+                <Button
+                variant="contained"
+                className={classes.statusBlock}
+                color="primary"
+                textDecoration="none"
+                style={{
+                  background : "#09BCBA"
+                }}
+                >
+                  Gửi email
+                </Button>
+              </a>
+            </Grid>
+            <Grid item>
+              <Button
+                variant="contained"
+                className={classes.statusBlock}
+                color="primary"
+                onClick={() => handleOpenChat(application.jobApplicant)}
+                >
+                Chat với ứng viên
+              </Button>
+            </Grid>
           </Grid>
         </Grid>
       </Grid>

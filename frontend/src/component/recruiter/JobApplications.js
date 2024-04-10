@@ -351,6 +351,7 @@ const ApplicationTile = (props) => {
   const setPopup = useContext(SetPopupContext);
   const [open, setOpen] = useState(false);
   const [openChat, setOpenChat] = useState(false);
+  const [openResume, setOpenResume] = useState(false);
   const [chat, setChat] = useState();
   const [user, setUser] = useState();
 
@@ -375,41 +376,22 @@ const ApplicationTile = (props) => {
       application.jobApplicant.resume &&
       application.jobApplicant.resume !== ""
     ) {
-      // const address = `${server}${application.jobApplicant.resume}`;
-      // console.log(address);
-      // axios(address, {
-      //   method: "GET",
-      //   responseType: "blob",
-      // })
-      //   .then((response) => {
-      //     // const file = new Blob([response.data], { type: "application/pdf" });
-      //     const fileURL = URL.createObjectURL(file);
-      //     window.open(fileURL);
-      //   })
-      //   .catch((error) => {
-      //     console.log(error);
-      //     setPopup({
-      //       open: true,
-      //       severity: "error",
-      //       message: "Error",
-      //     });
-      //   });
       try {
         const fileURL = application.jobApplicant.resume;
-        window.open(fileURL);
+        // window.open(fileURL);
+        setOpenResume(true);
       }
       catch {
         setPopup({
           open: true,
           severity: "error",
-          message: "Có lỗi xảy ra",
+          message: "Không thể mở Resume",
         });
       }
     } else {
       setPopup({
         open: true,
         severity: "error",
-        // message: "No resume found",
         message: "Không tìm thấy Resume"
       });
     }
@@ -570,11 +552,6 @@ const ApplicationTile = (props) => {
     ),
   };
 
-  const handleCloseChat = () => {
-    setOpenChat(false);
-  }
-
-
   const handleOpenChat = () => {
     if (["shortlisted", "accepted", "finished"].includes(application.status)){
       setOpenChat(true);
@@ -586,6 +563,29 @@ const ApplicationTile = (props) => {
         message: "Đơn cần được sơ tuyển/chấp nhận để chat",
       });
     }
+  }
+
+  const handleCloseChat = () => {
+    setOpenChat(false);
+  }
+
+  const handleOpenResume = () => {
+    if (application.jobApplicant.resume &&
+      application.jobApplicant.resume !== "") {
+      getResume();
+      setOpenResume(true);
+    }
+    else {
+      setPopup({
+        open: true,
+        severity: "error",
+        message: "Không tìm thấy Resume"
+      })
+    }
+  }
+
+  const handleCloseResume = () => {
+    setOpenResume(false);
   }
 
   return (
@@ -655,15 +655,35 @@ const ApplicationTile = (props) => {
           <Grid item container xs>
             {buttonSet[application.status]}
           </Grid>
-          <Grid item>
-            <Button
-              variant="contained"
-              className={classes.statusBlock}
-              color="primary"
-              onClick={() => handleOpenChat(application.jobApplicant)}
-            >
-              Chat với ứng viên
-            </Button>
+          <Grid item container direction="row"
+            // style={{ paddingTop : "2px"}}
+          >
+            <Grid item style={{ paddingRight : "2px"}}>
+              <a href={"mailto:" + application.jobApplicantMail.email} style={{ textDecoration : "none"}}>
+                <Button
+                variant="contained"
+                className={classes.statusBlock}
+                color="primary"
+                textDecoration="none"
+                style={{
+                  background : "#09BCBA"
+                }}
+                >
+                  Gửi email
+                </Button>
+              </a>
+            </Grid>
+            <Grid item >
+              <Button
+                variant="contained"
+                className={classes.statusBlock}
+                color="primary"
+                onClick={() => handleOpenChat(application.jobApplicant)}
+                // style={{ display : "flex"}}
+                >
+                Chat với ứng viên
+              </Button>
+            </Grid>
           </Grid>
         </Grid>
       </Grid>
@@ -712,6 +732,45 @@ const ApplicationTile = (props) => {
             Chat với {application.jobApplicant.name}
           </Typography>
           <SingleChat rcvUser={application.jobApplicant}/>
+        </Paper>
+      </Modal>
+      <Modal open={openResume} onClose={handleCloseResume} className={classes.popupDialog}>
+        <Paper
+          style={{
+            padding: "10px",
+            outline: "none",
+            display: "flex",
+            flexDirection: "column",
+            justifyContent: "center",
+            width: "70%",
+            minWidth: "400px",
+            height: "90%",
+            minHeight: "500x",
+            alignItems: "center",
+          }}
+        >
+          <Grid container direction="row" justifyContent="space-between" alignItems="center" style={{width:"100%", maxWidth:"100%"}}>
+            <Grid item xs>
+              <Typography variant="h4" style={{ marginBottom: "10px" }}>
+                Resume của {application.jobApplicant.name}
+              </Typography>
+            </Grid>
+            <Grid item>
+              <Button
+                variant="contained"
+                color="primary"
+                // style={{ padding: "10px 50px" }}
+                onClick={() => handleCloseResume()}
+              >
+                Đóng
+              </Button>
+            </Grid>
+          </Grid>
+          
+          <iframe 
+            height="100%" width="100%" 
+            src={application.jobApplicant.resume}
+          ></iframe>
         </Paper>
       </Modal>
     </Paper>
@@ -796,7 +855,7 @@ const JobApplications = (props) => {
         setApplications(response.data);
       })
       .catch((err) => {
-        console.log(err.response);
+        console.log(err);
         // console.log(err.response.data);
         setApplications([]);
         setPopup({
