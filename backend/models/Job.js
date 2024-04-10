@@ -15,13 +15,13 @@ let schema = new mongoose.Schema(
       validate: [
         {
           validator: Number.isInteger,
-          msg: "maxApplicants should be an integer",
+          msg: "Số ứng viên tối đa phải là số nguyên lớn hơn 0",
         },
         {
           validator: function (value) {
             return value > 0;
           },
-          msg: "maxApplicants should greater than 0",
+          msg: "Số ứng viên tối đa phải lớn hơn 0",
         },
       ],
     },
@@ -30,13 +30,13 @@ let schema = new mongoose.Schema(
       validate: [
         {
           validator: Number.isInteger,
-          msg: "maxPostions should be an integer",
+          msg: "Số vị trí còn lại phải là số nguyên lớn hơn 0",
         },
         {
           validator: function (value) {
             return value > 0;
           },
-          msg: "maxPositions should greater than 0",
+          msg: "Số vị trí còn lại phải lớn hơn 0",
         },
       ],
     },
@@ -46,13 +46,13 @@ let schema = new mongoose.Schema(
       validate: [
         {
           validator: Number.isInteger,
-          msg: "activeApplications should be an integer",
+          msg: "Đơn ứng tuyển còn hoạt động phải là số nguyên",
         },
         {
           validator: function (value) {
             return value >= 0;
           },
-          msg: "activeApplications should greater than equal to 0",
+          msg: "Đơn ứng tuyển còn hoạt động phải lớn hơn hoặc bằng 0",
         },
       ],
     },
@@ -62,19 +62,20 @@ let schema = new mongoose.Schema(
       validate: [
         {
           validator: Number.isInteger,
-          msg: "acceptedCandidates should be an integer",
+          msg: "Ứng viên đã chấp nhận phải là số nguyên",
         },
         {
           validator: function (value) {
             return value >= 0;
           },
-          msg: "acceptedCandidates should greater than equal to 0",
+          msg: "Ứng viên đã chấp nhận phải lớn hơn hoặc bằng 0",
         },
       ],
     },
     dateOfPosting: {
       type: Date,
       default: Date.now,
+      timezone: 'Asia/Ho_Chi_Minh'
     },
     deadline: {
       type: Date,
@@ -83,7 +84,7 @@ let schema = new mongoose.Schema(
           validator: function (value) {
             return this.dateOfPosting < value;
           },
-          msg: "deadline should be greater than dateOfPosting",
+          msg: "Hạn nộp đơn phải lớn hơn thời gian tạo",
         },
       ],
     },
@@ -98,7 +99,7 @@ let schema = new mongoose.Schema(
       validate: [
         {
           validator: Number.isInteger,
-          msg: "Duration should be an integer",
+          msg: "Thời lượng phải là số nguyên",
         },
       ],
     },
@@ -107,13 +108,13 @@ let schema = new mongoose.Schema(
       validate: [
         {
           validator: Number.isInteger,
-          msg: "Salary should be an integer",
+          msg: "Lương phải là số nguyên lớn hơn 0",
         },
         {
           validator: function (value) {
             return value >= 0;
           },
-          msg: "Salary should be positive",
+          msg: "Lương phải là số dương",
         },
       ],
     },
@@ -125,7 +126,7 @@ let schema = new mongoose.Schema(
         validator: function (v) {
           return v >= -1.0 && v <= 5.0;
         },
-        msg: "Invalid rating",
+        msg: "Đánh giá không hợp lệ",
       },
     },
   },

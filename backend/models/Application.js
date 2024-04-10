@@ -49,7 +49,7 @@ let schema = new mongoose.Schema(
         validator: function (v) {
           return v.split(" ").filter((ele) => ele != "").length <= 250;
         },
-        msg: "Statement of purpose should not be greater than 250 words",
+        msg: "Lý do ứng tuyển không vượt quá 250 từ",
       },
     },
   },
