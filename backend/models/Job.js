@@ -75,7 +75,6 @@ let schema = new mongoose.Schema(
     dateOfPosting: {
       type: Date,
       default: Date.now,
-      timezone: 'Asia/Ho_Chi_Minh'
     },
     deadline: {
       type: Date,
