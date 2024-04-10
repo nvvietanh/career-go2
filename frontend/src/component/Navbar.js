@@ -84,22 +84,22 @@ const Navbar = (props) => {
           {isAuth() ? (
             userType() === "recruiter" ? (
               <>
-                <Button color="inherit" onClick={() => handleClick("/home")}> {/* <button> */}
+                <Button color="inherit" className="btn" onClick={() => handleClick("/home")}> {/* <button> */}
                   Trang chủ
                 </Button>
-                <Button color="inherit" onClick={() => handleClick("/addjob")}>
+                <Button color="inherit" className="btn" onClick={() => handleClick("/addjob")}>
                   Thêm việc làm
                 </Button>
-                <Button color="inherit" onClick={() => handleClick("/myjobs")}>
+                <Button color="inherit" className="btn" onClick={() => handleClick("/myjobs")}>
                   Việc làm của tôi
                 </Button>
-                <Button color="inherit" onClick={() => handleClick("/employees")}>
+                <Button color="inherit" className="btn" onClick={() => handleClick("/employees")}>
                   Nhân viên
                 </Button>
-                <Button color="inherit" onClick={() => handleClick("/profile")}>
+                <Button color="inherit" className="btn" onClick={() => handleClick("/profile")}>
                   Hồ sơ
                 </Button>
-                <Button color="inherit" onClick={() => handleClick("/logout")}>
+                <Button color="inherit" className="btn" onClick={() => handleClick("/logout")}>
                   Đăng xuất
                 </Button>
               </>
@@ -124,10 +124,10 @@ const Navbar = (props) => {
             )
           ) : (
             <div>
-              <Button color="inherit" className="button-29" onClick={() => handleClick("/login")}>
+              <Button color="inherit" className="btn" onClick={() => handleClick("/login")}>
                 Đăng nhập
               </Button>
-              <Button color="inherit" className="button-29" onClick={() => handleClick("/signup")}>
+              <Button color="inherit" className="btn" onClick={() => handleClick("/signup")}>
                 Đăng ký
               </Button>
             </div>

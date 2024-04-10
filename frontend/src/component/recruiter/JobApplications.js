@@ -80,7 +80,7 @@ const FilterPopup = (props) => {
               item
               xs={9}
               justify="space-around"
-              // alignItems="center"
+            // alignItems="center"
             >
               <Grid item>
                 <FormControlLabel
@@ -348,12 +348,18 @@ const ApplicationTile = (props) => {
   const { application, getData } = props;
   const setPopup = useContext(SetPopupContext);
   const [open, setOpen] = useState(false);
+  const [openCV, setOpenCV] = useState(false);
+
+
 
   const appliedOn = new Date(application.dateOfApplication);
 
   const handleClose = () => {
     setOpen(false);
   };
+  const handleCloseCV = () => {
+    setOpenCV(false)
+  }
 
   const colorSet = {
     applied: "#3454D1",
@@ -392,6 +398,57 @@ const ApplicationTile = (props) => {
       try {
         const fileURL = application.jobApplicant.resume;
         window.open(fileURL);
+      }
+      catch {
+        setPopup({
+          open: true,
+          severity: "error",
+          message: "Có lỗi xảy ra",
+        });
+      }
+    } else {
+      setPopup({
+        open: true,
+        severity: "error",
+        // message: "No resume found",
+        message: "Không tìm thấy Resume"
+      });
+    }
+  };
+
+  const getCV = () => {
+    if (
+      application.jobApplicant.resume &&
+      application.jobApplicant.resume !== ""
+    ) {
+      // const address = `${server}${application.jobApplicant.resume}`;
+      // console.log(address);
+      // axios(address, {
+      //   method: "GET",
+      //   responseType: "blob",
+      // })
+      //   .then((response) => {
+      //     // const file = new Blob([response.data], { type: "application/pdf" });
+      //     const fileURL = URL.createObjectURL(file);
+      //     window.open(fileURL);
+      //   })
+      //   .catch((error) => {
+      //     console.log(error);
+      //     setPopup({
+      //       open: true,
+      //       severity: "error",
+      //       message: "Error",
+      //     });
+      //   });
+      try {
+        const fileURL = application.jobApplicant.resume;
+        setPopup({
+          open: true,
+          severity: "success",
+          message: fileURL
+        })
+        setOpenCV(true);
+
       }
       catch {
         setPopup({
@@ -602,9 +659,8 @@ const ApplicationTile = (props) => {
             Học vấn:{" "}
             {application.jobApplicant.education
               .map((edu) => {
-                return `${edu.institutionName} (${edu.startYear}-${
-                  edu.endYear ? edu.endYear : "Chưa hoàn thành"
-                })`;
+                return `${edu.institutionName} (${edu.startYear}-${edu.endYear ? edu.endYear : "Chưa hoàn thành"
+                  })`;
               })
               .join(", ")}
           </Grid>
@@ -628,6 +684,16 @@ const ApplicationTile = (props) => {
               Tải Resume về
             </Button>
           </Grid>
+          <Grid item>
+            <Button
+              variant="contained"
+              className={classes.statusBlock}
+              color="primary"
+              onClick={() => getCV()}
+            >
+              Xem Resume
+            </Button>
+          </Grid>
           <Grid item container xs>
             {buttonSet[application.status]}
           </Grid>
@@ -649,11 +715,26 @@ const ApplicationTile = (props) => {
             variant="contained"
             color="primary"
             style={{ padding: "10px 50px" }}
-            // onClick={() => changeRating()}
+          // onClick={() => changeRating()}
           >
             {/* Submit */}
             Đồng ý
           </Button>
+        </Paper>
+      </Modal>
+      <Modal open={openCV} onClose={handleCloseCV} className={classes.popupDialog}>
+        <Paper
+          style={{
+            padding: "20px",
+            outline: "none",
+            display: "flex",
+            flexDirection: "column",
+            justifyContent: "center",
+            minWidth: "30%",
+            alignItems: "center",
+          }}
+        >
+          <iframe height={600} width={1000} src={application.jobApplicant.resume}></iframe>
         </Paper>
       </Modal>
     </Paper>
