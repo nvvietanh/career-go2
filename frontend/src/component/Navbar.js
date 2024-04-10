@@ -120,14 +120,14 @@ const Navbar = (props) => {
               </>
             )
           ) : (
-            <div>
+            <>
               <Button color="inherit" className="btn" onClick={() => handleClick("/login")}>
                 Đăng nhập
               </Button>
               <Button color="inherit" className="btn" onClick={() => handleClick("/signup")}>
                 Đăng ký
               </Button>
-            </div>
+            </>
           )}
         </div>
         <div id="mobile" onClick={handleClickState}>

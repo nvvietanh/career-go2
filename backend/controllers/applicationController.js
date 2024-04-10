@@ -18,6 +18,21 @@ const fetchApplicaions = (req, res) => {
     { $unwind: "$jobApplicant" },
     {
       $lookup: {
+        from: "userauths",
+        localField: "userId",
+        foreignField: "_id",
+        pipeline: [
+          { $project : {
+            _id : 0,
+            email : 1
+          }}
+        ],
+        as: "jobApplicantMail"
+      }
+    },
+    { $unwind: "$jobApplicantMail" },
+    {
+      $lookup: {
         from: "jobs",
         localField: "jobId",
         foreignField: "_id",
@@ -34,6 +49,22 @@ const fetchApplicaions = (req, res) => {
       },
     },
     { $unwind: "$recruiter" },
+    {
+      $lookup: {
+        from: "userauths",
+        localField: "recruiterId",
+        foreignField: "_id",
+        pipeline: [
+          { $project : {
+            _id : 0,
+            email : 1,
+            // password : 0
+          }}
+        ],
+        as: "recruiterMail"
+      }
+    },
+    { $unwind: "$recruiterMail" },
     {
       $match: {
         [user.type === "recruiter" ? "recruiterId" : "userId"]: user._id,

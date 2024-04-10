@@ -553,14 +553,6 @@ const fetchJobApplicants = (req, res) => {
           as: "jobApplicantMail"
         }
       },
-      // {
-      //   $project: {
-      //     "_id" : 0,
-      //     "email": 1,
-      //     "password" : 0,
-      //     "type" : 0
-      //   }
-      // },
       { $unwind: "$jobApplicantMail" },
       {
         $lookup: {

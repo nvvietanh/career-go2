@@ -217,7 +217,7 @@ const ApplicationTile = (props) => {
               </Button>
             </Grid>
           ) : null}
-          <Grid item>
+          {/* <Grid item style={{ paddingTop : "2px" }}>
             <Button
               variant="contained"
               className={classes.statusBlock}
@@ -226,6 +226,36 @@ const ApplicationTile = (props) => {
             >
               Chat với nhà tuyển dụng
             </Button>
+          </Grid> */}
+          <Grid item container direction="row"
+            style={{ paddingTop : "2px"}}
+          >
+            <Grid item style={{ paddingRight : "2px"}}>
+              <a href={"mailto:" + application.recruiterMail.email} style={{ textDecoration : "none"}}>
+                <Button
+                variant="contained"
+                className={classes.statusBlock}
+                color="primary"
+                textDecoration="none"
+                style={{
+                  background : "#09BCBA"
+                }}
+                >
+                  Gửi email
+                </Button>
+              </a>
+            </Grid>
+            <Grid item >
+              <Button
+                variant="contained"
+                className={classes.statusBlock}
+                color="primary"
+                onClick={() => handleOpenChat(application.jobApplicant)}
+                // style={{ display : "flex"}}
+                >
+                Chat với nhà tuyển dụng
+              </Button>
+            </Grid>
           </Grid>
         </Grid>
       </Grid>

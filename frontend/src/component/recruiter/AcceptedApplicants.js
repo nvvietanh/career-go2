@@ -402,6 +402,7 @@ const ApplicationTile = (props) => {
   const [openEndJob, setOpenEndJob] = useState(false);
   const [rating, setRating] = useState(application.jobApplicant.rating);
   const [openChat, setOpenChat] = useState(false);
+  const [openResume, setOpenResume] = useState(false);
 
   const appliedOn = new Date(application.dateOfApplication);
 
@@ -465,34 +466,16 @@ const ApplicationTile = (props) => {
       application.jobApplicant.resume &&
       application.jobApplicant.resume !== ""
     ) {
-      // const address = `${server}${application.jobApplicant.resume}`;
-      // console.log(address);
-      // axios(address, {
-      //   method: "GET",
-      //   responseType: "blob",
-      // })
-      //   .then((response) => {
-      //     const file = new Blob([response.data], { type: "application/pdf" });
-      //     const fileURL = URL.createObjectURL(file);
-      //     window.open(fileURL);
-      //   })
-      //   .catch((error) => {
-      //     console.log(error);
-      //     setPopup({
-      //       open: true,
-      //       severity: "error",
-      //       message: "Có lỗi xảy ra",
-      //     });
-      //   });
       try {
         const fileURL = application.jobApplicant.resume;
-        window.open(fileURL);
+        // window.open(fileURL);
+        setOpenResume(true);
       }
       catch {
         setPopup({
           open: true,
           severity: "error",
-          message: "Có lỗi xảy ra",
+          message: "Không thể mở Resume",
         });
       }
     } else {
@@ -540,11 +523,28 @@ const ApplicationTile = (props) => {
     setOpenChat(false);
   }
 
-
   const handleOpenChat = () => {
     setOpenChat(true);
   }
 
+  const handleOpenResume = () => {
+    if (application.jobApplicant.resume &&
+      application.jobApplicant.resume !== "") {
+      getResume();
+      setOpenResume(true);
+    }
+    else {
+      setPopup({
+        open: true,
+        severity: "error",
+        message: "Không tìm thấy Resume"
+      })
+    }
+  }
+
+  const handleCloseResume = () => {
+    setOpenResume(false);
+  }
 
   return (
     <Paper className={classes.jobTileOuter} elevation={3}>
@@ -584,7 +584,7 @@ const ApplicationTile = (props) => {
           <Grid item>Loại hình: {application.job.jobType}</Grid>
           <Grid item>Ứng tuyển lúc: {appliedOn.toLocaleDateString()}</Grid>
           <Grid item>
-            SOP: {application.sop !== "" ? application.sop : "Không có"}
+            Lý do ứng tuyển: {application.sop !== "" ? application.sop : ""}
           </Grid>
           <Grid item>
             {application.jobApplicant.skills.map((skill) => (
@@ -600,7 +600,7 @@ const ApplicationTile = (props) => {
               color="primary"
               onClick={() => getResume()}
             >
-              Tải Resume về
+              Xem Resume
             </Button>
           </Grid>
           <Grid item container xs>
@@ -633,7 +633,7 @@ const ApplicationTile = (props) => {
           </Grid>
           <Grid item container direction="row" style={{ paddingTop : "2px" }} spacing={"2px"}>
             <Grid item style={{ paddingRight : "2px"}}>
-              <a href="mailto:someone@example.com" style={{ textDecoration : "none"}}>
+              <a href={"mailto:" + application.jobApplicantMail.email} style={{ textDecoration : "none"}}>
                 <Button
                 variant="contained"
                 className={classes.statusBlock}
@@ -760,6 +760,45 @@ const ApplicationTile = (props) => {
             Chat với {application.jobApplicant.name}
           </Typography>
           <SingleChat rcvUser={application.jobApplicant}/>
+        </Paper>
+      </Modal>
+      <Modal open={openResume} onClose={handleCloseResume} className={classes.popupDialog}>
+        <Paper
+          style={{
+            padding: "10px",
+            outline: "none",
+            display: "flex",
+            flexDirection: "column",
+            justifyContent: "center",
+            width: "70%",
+            minWidth: "400px",
+            height: "90%",
+            minHeight: "500x",
+            alignItems: "center",
+          }}
+        >
+          <Grid container direction="row" justifyContent="space-between" alignItems="center" style={{width:"100%", maxWidth:"100%"}}>
+            <Grid item xs>
+              <Typography variant="h4" style={{ marginBottom: "10px" }}>
+                Resume của {application.jobApplicant.name}
+              </Typography>
+            </Grid>
+            <Grid item>
+              <Button
+                variant="contained"
+                color="primary"
+                // style={{ padding: "10px 50px" }}
+                onClick={() => handleCloseResume()}
+              >
+                Đóng
+              </Button>
+            </Grid>
+          </Grid>
+          
+          <iframe 
+            height="100%" width="100%" 
+            src={application.jobApplicant.resume}
+          ></iframe>
         </Paper>
       </Modal>
     </Paper>

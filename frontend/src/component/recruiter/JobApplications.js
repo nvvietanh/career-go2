@@ -352,8 +352,6 @@ const ApplicationTile = (props) => {
   const [open, setOpen] = useState(false);
   const [openChat, setOpenChat] = useState(false);
   const [openResume, setOpenResume] = useState(false);
-  const [chat, setChat] = useState();
-  const [user, setUser] = useState();
 
   const appliedOn = new Date(application.dateOfApplication);
 
@@ -656,7 +654,7 @@ const ApplicationTile = (props) => {
             {buttonSet[application.status]}
           </Grid>
           <Grid item container direction="row"
-            // style={{ paddingTop : "2px"}}
+            style={{ paddingTop : "2px"}}
           >
             <Grid item style={{ paddingRight : "2px"}}>
               <a href={"mailto:" + application.jobApplicantMail.email} style={{ textDecoration : "none"}}>
