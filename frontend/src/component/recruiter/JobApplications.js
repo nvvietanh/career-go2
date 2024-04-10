@@ -345,6 +345,8 @@ const FilterPopup = (props) => {
   );
 };
 
+// const mailSubject = "Phản hồi đơn ứng tuyển của bạn "
+
 const ApplicationTile = (props) => {
   const classes = useStyles();
   const { application, getData } = props;
@@ -657,7 +659,20 @@ const ApplicationTile = (props) => {
             style={{ paddingTop : "2px"}}
           >
             <Grid item style={{ paddingRight : "2px"}}>
-              <a href={"mailto:" + application.jobApplicantMail.email} style={{ textDecoration : "none"}}>
+              <a href={"mailto:" + application.jobApplicantMail.email + 
+                "?subject=Phản hồi đơn ứng tuyển của " + application.jobApplicant.name + " đến công việc "
+                + application.job.title + " đăng bởi " + application.recruiter.name + " trên website CareerGo"
+                + "&body=Xin chào " + application.jobApplicant.name + ", %0D%0A%0D%0A"
+                + "Chúng tôi rất cảm ơn bạn đã quan tâm và ứng tuyển đến công việc "
+                + application.job.title + " của chúng tôi qua website CareerGo.%0D%0A%0D%0A"
+                + "Để tiếp tục quá trình tuyển dụng, chúng tôi mong muốn mời bạn tham gia một cuộc họp để thảo luận thêm một số vấn đề.%0D%0A"
+                + "Thời gian: %0D%0A"
+                + "Link cuộc họp: %0D%0A%0D%0A"
+                + "Vui lòng xác nhận tham gia bằng cách trả lời email này. Nếu bạn có bất kỳ yêu cầu hoặc thắc mắc nào, hãy liên hệ với chúng tôi qua website CareerGo (sau khi sơ tuyển), hoặc qua email này, hoặc số điện thoại " + application.recruiter.contactNumber + ".%0D%0A%0D%0A"
+                + "Trân trọng,%0D%0A"
+                + application.recruiter.name + "%0D%0A"
+                + application.recruiter.contactNumber
+              } style={{ textDecoration : "none"}}>
                 <Button
                 variant="contained"
                 className={classes.statusBlock}

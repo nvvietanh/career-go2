@@ -163,10 +163,9 @@ const fetchJob = (req, res) => {
   // .skip(skip)
   // .limit(limit)
 
-  // truy vấn
   let arr = [
     {
-      $lookup: { // kết nối ngoài trái bảng Recruiter với bảng User với thuộc tính chung là userId
+      $lookup: {
         from: "recruiterinfos",
         localField: "userId",
         foreignField: "userId",
@@ -563,6 +562,15 @@ const fetchJobApplicants = (req, res) => {
         },
       },
       { $unwind: "$job" },
+      {
+        $lookup: {
+          from: "recruiterinfos",
+          localField: "recruiterId",
+          foreignField: "userId",
+          as: "recruiter",
+        },
+      },
+      { $unwind: "$recruiter" },
       { $match: findParams }, // khớp với giá trị các tham số lọc
       { $sort: sortParams }, // sắp xếp theo giá trị các tham số sắp xếp
     ])
