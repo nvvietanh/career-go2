@@ -19,3 +19,4 @@ https://career-go2.vercel.app/
 - Chạy frontend server: `npm start` tại đường dẫn của frontend
 - Frontend sử dụng cổng 3000
 - Mở URL `http://localhost:3000/` để truy cập website.
+
