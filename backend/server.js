@@ -3,7 +3,6 @@ const bodyParser = require("body-parser");
 const mongoose = require("mongoose");
 const passportConfig = require("./middlewares/passportConfig");
 const cors = require("cors");
-const fs = require("fs");
 const morgan = require("morgan");
 
 require("dotenv").config();
@@ -47,8 +46,6 @@ app.use("/api/rating", require("./routes/ratingRoutes"));
 app.use("/api/applicants", require("./routes/applicantRoutes"));
 app.use("/api/chat", require("./routes/chatRoutes"));
 app.use("/api/message", require("./routes/messageRoutes"));
-
-// app.use("/upload", require("./routes/uploadRoutes"));
 
 app.use((req, res, next) => {
   const error = new Error('Không tìm thấy trang');

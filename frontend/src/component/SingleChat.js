@@ -1,13 +1,10 @@
 import { useState, useEffect, useContext } from "react";
 import { Box, Input, makeStyles, FormControl, OutlinedInput, InputLabel, TextField, Grid } from "@material-ui/core";
 import axios from "axios";
-import io from "socket.io-client";
-// import { FormControl, Input } from '@mui/material';
 import { SetPopupContext } from "../App";
 import ScrollableChat from "./ScrollableChat";
 import { socket } from "../service/socket";
 
-const ENDPOINT = process.env.REACT_APP_SERVER_URL;
 // var socket
 var chatCompare;
 
@@ -34,19 +31,6 @@ const SingleChat = (props) => {
   const [user, setUser] = useState({ "_id" : localStorage.getItem("userId")});
   const [rcvUser, setRcvUser] = useState(props.rcvUser);
 
-  const defaultOptions = {
-    // loop: true,
-    // autoplay: true,
-    // animationData: animationData,
-    // rendererSettings: {
-    //   preserveAspectRatio: "xMidYMid slice",
-    // },
-  };
-
-  // console.log(user)
-  // console.log(chat)
-  // console.log(rcvUser)
-
   const fetchMessages = () => {
     console.log(chat)
     // console.log(user)
@@ -59,8 +43,6 @@ const SingleChat = (props) => {
         },
       };
 
-      // setLoading(true);
-
       axios.get(
         `${process.env.REACT_APP_SERVER_URL}/api/message/${chat._id}`,
         config
@@ -70,7 +52,6 @@ const SingleChat = (props) => {
         console.log(messages)
         socket.emit("join chat", chat._id);
       })
-      // setLoading(false); 
 
     } catch (error) {
       setPopup({
@@ -119,35 +100,14 @@ const SingleChat = (props) => {
     // if (!socketConnected) return;
 
     // console.log(newMessage)
-    // if (!typing) {
-    //   setTyping(true);
-    //   socket.emit("typing", selectedChat._id);
-    // }
-    // let lastTypingTime = new Date().getTime();
-    // var timerLength = 3000;
-    // setTimeout(() => {
-    //   var timeNow = new Date().getTime();
-    //   var timeDiff = timeNow - lastTypingTime;
-    //   if (timeDiff >= timerLength && typing) {
-    //     socket.emit("stop typing", selectedChat._id);
-    //     setTyping(false);
-    //   }
-    // }, timerLength);
   }
 
   useEffect(() => {
-    // setUser(props.user);
-    // setChat(props.chat);
     // socket = io(ENDPOINT);
     socket.emit("setup", { "_id" : localStorage.getItem("userId") });
     socket.on("connected", () => setSocketConnected(true));
-    // socket.on("typing", () => setIsTyping(true));
-    // socket.on("stop typing", () => setIsTyping(false));
-
-    // eslint-disable-next-line
 
     try {
-      // setLoadingChat(true);
       const config = {
         headers: {
           "Content-type": "application/json",
@@ -177,8 +137,6 @@ const SingleChat = (props) => {
       });
 
       // if (!chats.find((c) => c._id === data._id)) setChats([data, ...chats]);
-      // setSelectedChat(data);
-      // setLoadingChat(false);
       // onClose();
     } catch (error) {
       setPopup({
@@ -202,10 +160,7 @@ const SingleChat = (props) => {
         !chatCompare || // if chat is not selected or doesn't match current chat
         chatCompare._id !== newMessageRecieved.chat._id
       ) {
-        // if (!notification.includes(newMessageRecieved)) {
-        //   setNotification([newMessageRecieved, ...notification]);
-        //   setFetchAgain(!fetchAgain);
-        // }
+
       } else {
         setMessages([...messages, newMessageRecieved]);
         console.log(newMessageRecieved)
@@ -221,8 +176,6 @@ const SingleChat = (props) => {
   return (
     <>
       <Box 
-        // style={{
-        
         width="100%"
         height="100%" 
         borderRadius="lg"
@@ -235,7 +188,6 @@ const SingleChat = (props) => {
           flexDirection: "column",
           overflowY: "hidden",
         }}
-        // }}
       >
         <div style={{
           display:"flex",

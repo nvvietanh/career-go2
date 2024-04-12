@@ -53,7 +53,7 @@ const FileUploadInput = (props) => {
       });
   };
 
-  // upload to cloundinary
+  // upload to cloudinary
   const handleUpload1 = async () => {
     const fdata = new FormData();
     let fURL = "";
@@ -63,13 +63,10 @@ const FileUploadInput = (props) => {
     await fetch("https://api.cloudinary.com/v1_1/ngvvanh261/image/upload", {
         method: "post",
         body: fdata,
-        // mode: "cors",
       })
         .then(async (res) => res.json())
         .then(async (dat) => {
-          // setPic(dataf.url.toString());
           console.log(dat.url.toString());
-          // setPicLoading(false); 
           fURL = dat.url.toString();
 
           Axios
