@@ -6,7 +6,9 @@ import isAuth from "../lib/isAuth";
 const Welcome = (props) => {
   const history = useHistory();
   return (
-    <header id="header">
+    <header id="header"
+      style={{display: "flex", position:"absolute",height:"100%", width: "100%"}}
+      >
       <div className="intro">
         <div className="overlay">
           <div className="container">

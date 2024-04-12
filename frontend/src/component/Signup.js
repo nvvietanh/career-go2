@@ -515,24 +515,3 @@ const Signup = (props) => {
 };
 
 export default Signup;
-
-// {/* <Grid item>
-//           <PasswordInput
-//             label="Re-enter Password"
-//             value={signupDetails.tmpPassword}
-//             onChange={(event) => handleInput("tmpPassword", event.target.value)}
-//             className={classes.inputBox}
-//             labelWidth={140}
-//             helperText={inputErrorHandler.tmpPassword.message}
-//             error={inputErrorHandler.tmpPassword.error}
-//             onBlur={(event) => {
-//               if (event.target.value !== signupDetails.password) {
-//                 handleInputError(
-//                   "tmpPassword",
-//                   true,
-//                   "Passwords are not same."
-//                 );
-//               }
-//             }}
-//           />
-//         </Grid> */}

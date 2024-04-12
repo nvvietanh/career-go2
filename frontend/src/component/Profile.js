@@ -30,6 +30,12 @@ const useStyles = makeStyles((theme) => ({
     justifyContent: "center",
     // padding: "30px",
   },
+  popupDialog: {
+    height: "100%",
+    display: "flex",
+    alignItems: "center",
+    justifyContent: "center",
+  },
   avatar: {
     width: theme.spacing(17),
     height: theme.spacing(17),
@@ -114,7 +120,7 @@ const Profile = (props) => {
   const setPopup = useContext(SetPopupContext);
   const [userData, setUserData] = useState();
   const [open, setOpen] = useState(false);
-
+  
   const [profileDetails, setProfileDetails] = useState({
     name: "",
     education: [],
@@ -130,7 +136,7 @@ const Profile = (props) => {
       endYear: "",
     },
   ]);
-
+  
   const handleInput = (key, value) => {
     setProfileDetails({
       ...profileDetails,
@@ -138,6 +144,8 @@ const Profile = (props) => {
     });
   };
 
+  const [openResume, setOpenResume] = useState(false);
+  
   useEffect(() => {
     getData();
   }, []);
@@ -152,6 +160,7 @@ const Profile = (props) => {
       .then((response) => {
         console.log(response.data);
         setProfileDetails(response.data);
+        
         if (response.data.education.length > 0) {
           setEducation(
             response.data.education.map((edu) => ({
@@ -167,7 +176,7 @@ const Profile = (props) => {
         setPopup({
           open: true,
           severity: "error",
-          message: "Error",
+          message: "Có lỗi xảy ra",
         });
       });
   };
@@ -226,25 +235,28 @@ const Profile = (props) => {
       profileDetails.resume !== ""
     ) {
       try {
-        const fileURL = profileDetails.resume;
-        window.open(fileURL);
+        // const fileURL = profileDetails.resume;
+        setOpenResume(true);
       }
       catch {
         setPopup({
           open: true,
           severity: "error",
-          message: "Có lỗi xảy ra",
+          message: "Không thể mở Resume",
         });
       }
     } else {
       setPopup({
         open: true,
         severity: "error",
-        // message: "No resume found",
         message: "Không tìm thấy Resume"
       });
     }
   };
+
+  const handleCloseResume = () => {
+    setOpenResume(false);
+  }
 
   return (
     <>
@@ -370,6 +382,45 @@ const Profile = (props) => {
       {/* <Modal open={open} onClose={handleClose} className={classes.popupDialog}> */}
 
       {/* </Modal> */}
+      <Modal open={openResume} onClose={handleCloseResume} className={classes.popupDialog}>
+        <Paper
+          style={{
+            padding: "10px",
+            outline: "none",
+            display: "flex",
+            flexDirection: "column",
+            justifyContent: "center",
+            width: "70%",
+            minWidth: "400px",
+            height: "90%",
+            minHeight: "500x",
+            alignItems: "center",
+          }}
+        >
+          <Grid container direction="row" justifyContent="space-between" alignItems="center" style={{width:"100%", maxWidth:"100%"}}>
+            <Grid item xs>
+              <Typography variant="h5" style={{ marginBottom: "10px" }}>
+                Resume của {profileDetails.name}
+              </Typography>
+            </Grid>
+            <Grid item>
+              <Button
+                variant="contained"
+                color="primary"
+                // style={{ padding: "10px 50px" }}
+                onClick={() => handleCloseResume()}
+              >
+                Đóng
+              </Button>
+            </Grid>
+          </Grid>
+          
+          <iframe 
+            height="100%" width="100%" 
+            src={profileDetails.resume}
+          ></iframe>
+        </Paper>
+      </Modal>
     </>
   );
 };

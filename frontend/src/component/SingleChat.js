@@ -5,7 +5,6 @@ import { SetPopupContext } from "../App";
 import ScrollableChat from "./ScrollableChat";
 import { socket } from "../service/socket";
 
-// var socket
 var chatCompare;
 
 const useStyles = makeStyles((theme) => ({
@@ -157,7 +156,7 @@ const SingleChat = (props) => {
     socket.on("message recieved", (newMessageRecieved) => {
       console.log("socket on msg revcieved")
       if (
-        !chatCompare || // if chat is not selected or doesn't match current chat
+        !chatCompare ||
         chatCompare._id !== newMessageRecieved.chat._id
       ) {
 

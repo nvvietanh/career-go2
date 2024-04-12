@@ -217,16 +217,7 @@ const ApplicationTile = (props) => {
               </Button>
             </Grid>
           ) : null}
-          {/* <Grid item style={{ paddingTop : "2px" }}>
-            <Button
-              variant="contained"
-              className={classes.statusBlock}
-              color="primary"
-              onClick={() => handleOpenChat(application.jobApplicant)}
-            >
-              Chat với nhà tuyển dụng
-            </Button>
-          </Grid> */}
+
           <Grid item container direction="row"
             style={{ paddingTop : "2px"}}
           >

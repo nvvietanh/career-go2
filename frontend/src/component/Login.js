@@ -126,7 +126,6 @@ const Login = (props) => {
         </Grid>
         <Grid item>
           <PasswordInput
-            // label="Password"
             label="Mật khẩu"
             value={loginDetails.password}
             onChange={(event) => handleInput("password", event.target.value)}

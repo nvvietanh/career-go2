@@ -736,15 +736,7 @@ const MyJobs = (props) => {
     if (searchOptions.query !== "") {
       searchParams = [...searchParams, `q=${searchOptions.query}`];
     }
-    // if (searchOptions.jobType.fullTime) {
-    //   searchParams = [...searchParams, `jobType=Full%20Time`];
-    // }
-    // if (searchOptions.jobType.partTime) {
-    //   searchParams = [...searchParams, `jobType=Part%20Time`];
-    // }
-    // if (searchOptions.jobType.wfh) {
-    //   searchParams = [...searchParams, `jobType=Work%20From%20Home`];
-    // }
+
     if (searchOptions.jobType.fullTime) {
       searchParams = [...searchParams, `jobType=Toàn%20thời%20gian`];
     }

@@ -569,21 +569,6 @@ const ApplicationTile = (props) => {
     setOpenChat(false);
   }
 
-  const handleOpenResume = () => {
-    if (application.jobApplicant.resume &&
-      application.jobApplicant.resume !== "") {
-      getResume();
-      setOpenResume(true);
-    }
-    else {
-      setPopup({
-        open: true,
-        severity: "error",
-        message: "Không tìm thấy Resume"
-      })
-    }
-  }
-
   const handleCloseResume = () => {
     setOpenResume(false);
   }

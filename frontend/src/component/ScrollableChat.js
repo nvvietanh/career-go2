@@ -1,7 +1,5 @@
 import ScrollableFeed from "react-scrollable-feed";
 import {
-  isLastMessage,
-  isSameSender,
   isSameSenderMargin,
   isSameUser,
 } from "../config/ChatLogics";

@@ -1,11 +1,8 @@
 import { useState, useContext } from "react";
-import { Grid, Button, TextField, LinearProgress } from "@material-ui/core";
-import { CloudUpload } from "@material-ui/icons";
+import { Grid, Button, TextField } from "@material-ui/core";
 import Axios from "axios";
 
 import { SetPopupContext } from "../App";
-import axios from "axios";
-import apiList from "./apiList";
 
 const FileUploadInput = (props) => {
   const setPopup = useContext(SetPopupContext);
@@ -13,48 +10,9 @@ const FileUploadInput = (props) => {
   const { uploadTo, identifier, handleInput, acceptedTypes } = props;
 
   const [file, setFile] = useState("");
-  const [uploadPercentage, setUploadPercentage] = useState(0);
 
-  const handleUpload = () => {
-    console.log("This is file" + file);
-    const data = new FormData();
-    data.append("file", file);
-    Axios.post(uploadTo, data, {
-      headers: {
-        "Content-Type": "multipart/form-data",
-      },
-      onUploadProgress: (progressEvent) => {
-        setUploadPercentage(
-          parseInt(
-            Math.round((progressEvent.loaded * 100) / progressEvent.total)
-          )
-        );
-      },
-    })
-      .then((response) => {
-        console.log(response.data);
-        handleInput(identifier, response.data.url);
-        setPopup({
-          open: true,
-          severity: "success",
-          message: response.data.message,
-        });
-      })
-      .catch((err) => {
-        console.log(err.response);
-        setPopup({
-          open: true,
-          severity: "error",
-          message: err.response.statusText,
-          //   message: err.response.data
-          //     ? err.response.data.message
-          //     : err.response.statusText,
-        });
-      });
-  };
-
-  // upload to cloudinary
-  const handleUpload1 = async () => {
+  // upload to Cloudinary
+  const handleUpload = async () => {
     const fdata = new FormData();
     let fURL = "";
     fdata.append("file", file);
@@ -79,10 +37,11 @@ const FileUploadInput = (props) => {
               }}
             )
             .then((res) => {
+              handleInput(identifier, fURL);
               setPopup({
                 open: true,
                 severity: "success",
-                message: "Cập nhật thành công",
+                message: "Tải tệp thành công",
               });
             })
             .catch((err) => {
@@ -121,16 +80,10 @@ const FileUploadInput = (props) => {
               accept={acceptedTypes}
               style={{ display: "none" }}
               onChange={(event) => {
-                console.log("F1" + event.target.files[0]);
-                setUploadPercentage(1);
-                setFile(event.target.files[0]);
+                console.log("F1" + event.target.files[event.target.files.length - 1]);
+                setFile(event.target.files[event.target.files.length - 1]);
                 console.log(file);
               }}
-              // onChange={onChange}
-              // onChange={
-              //   (e) => {}
-              //   //   setSource({ ...source, place_img: e.target.files[0] })
-              // }
             />
           </Button>
         </Grid>
@@ -150,18 +103,13 @@ const FileUploadInput = (props) => {
             variant="contained"
             color="secondary"
             style={{ width: "100%", height: "100%" }}
-            onClick={() => handleUpload1()}
+            onClick={() => handleUpload()}
             disabled={file ? false : true}
           >
-            <CloudUpload />
+            Tải lên
           </Button>
         </Grid>
       </Grid>
-      {/* {uploadPercentage !== 0 ? (
-        <Grid item xs={12} style={{ marginTop: "10px" }}>
-          <LinearProgress variant="determinate" value={uploadPercentage} />
-        </Grid>
-      ) : null} */}
     </Grid>
   );
 };

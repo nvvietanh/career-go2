@@ -43,14 +43,6 @@ function App() {
     severity: "",
     message: "",
   });
-  // useEffect(() => {
-  //   if (localStorage.getItem("token")) {
-  //     console.log("logged in")
-  //     socket.emit("setup", { "_id" : localStorage.getItem("userId") });
-  //     // socket.on("connected", () => setSocketConnected(true));
-  //   }
-  // })
-  // const pcontext = useContext(PopupContext);
   return (
     <div className="App">
     <BrowserRouter>

@@ -99,17 +99,6 @@ const JobTile = (props) => {
   };
 
   const deadline = new Date(job.deadline).toLocaleDateString("vi-VN");
-  // let day = deadline0.getDate();
-  // console.log(day); // 23
-
-  // let month = deadline0.getMonth();
-  // console.log(month + 1); // 8
-
-  // let year = deadline0.getFullYear();
-  // console.log(year); // 2022
-
-  // let deadline = day + "/" + month + "/" + year;
-
 
   return (
     <Paper className={classes.jobTileOuter} elevation={3}>

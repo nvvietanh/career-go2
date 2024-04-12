@@ -72,79 +72,6 @@ const FilterPopup = (props) => {
         }}
       >
         <Grid container direction="column" alignItems="center" spacing={3}>
-          {/* <Grid container item alignItems="center">
-            <Grid item xs={3}>
-              Application Status
-            </Grid>
-            <Grid
-              container
-              item
-              xs={9}
-              justify="space-around"
-              // alignItems="center"
-            >
-              <Grid item>
-                <FormControlLabel
-                  control={
-                    <Checkbox
-                      name="rejected"
-                      checked={searchOptions.status.rejected}
-                      onChange={(event) => {
-                        setSearchOptions({
-                          ...searchOptions,
-                          status: {
-                            ...searchOptions.status,
-                            [event.target.name]: event.target.checked,
-                          },
-                        });
-                      }}
-                    />
-                  }
-                  label="Rejected"
-                />
-              </Grid>
-              <Grid item>
-                <FormControlLabel
-                  control={
-                    <Checkbox
-                      name="applied"
-                      checked={searchOptions.status.applied}
-                      onChange={(event) => {
-                        setSearchOptions({
-                          ...searchOptions,
-                          status: {
-                            ...searchOptions.status,
-                            [event.target.name]: event.target.checked,
-                          },
-                        });
-                      }}
-                    />
-                  }
-                  label="Applied"
-                />
-              </Grid>
-              <Grid item>
-                <FormControlLabel
-                  control={
-                    <Checkbox
-                      name="shortlisted"
-                      checked={searchOptions.status.shortlisted}
-                      onChange={(event) => {
-                        setSearchOptions({
-                          ...searchOptions,
-                          status: {
-                            ...searchOptions.status,
-                            [event.target.name]: event.target.checked,
-                          },
-                        });
-                      }}
-                    />
-                  }
-                  label="Shortlisted"
-                />
-              </Grid>
-            </Grid>
-          </Grid> */}
           <Grid container item alignItems="center">
             <Grid item xs={3}>
               Sắp xếp
@@ -527,21 +454,6 @@ const ApplicationTile = (props) => {
     setOpenChat(true);
   }
 
-  const handleOpenResume = () => {
-    if (application.jobApplicant.resume &&
-      application.jobApplicant.resume !== "") {
-      getResume();
-      setOpenResume(true);
-    }
-    else {
-      setPopup({
-        open: true,
-        severity: "error",
-        message: "Không tìm thấy Resume"
-      })
-    }
-  }
-
   const handleCloseResume = () => {
     setOpenResume(false);
   }
@@ -654,7 +566,7 @@ const ApplicationTile = (props) => {
                 color="primary"
                 onClick={() => handleOpenChat(application.jobApplicant)}
                 >
-                Chat với ứng viên
+                Chat
               </Button>
             </Grid>
           </Grid>
